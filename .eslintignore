@@ -11,6 +11,7 @@ scripts/*
 node_modules
 coverage
 .next
+.idea
 build
 !.commitlintrc.cjs
 !.lintstagedrc.cjs

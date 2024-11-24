@@ -2,6 +2,7 @@
 	"name": "next-app-template",
 	"version": "0.0.1",
 	"private": true,
+	"type": "module",
 	"scripts": {
 		"dev": "next dev --turbo",
 		"build": "next build",
@@ -9,6 +10,7 @@
 		"lint": "eslint . --ext .ts,.tsx -c .eslintrc.json --fix"
 	},
 	"dependencies": {
+		"@hocuspocus/provider": "^2.14.0",
 		"@nextui-org/button": "2.0.38",
 		"@nextui-org/code": "2.0.33",
 		"@nextui-org/input": "2.2.5",
@@ -22,6 +24,10 @@
 		"@nextui-org/theme": "2.2.11",
 		"@react-aria/ssr": "3.9.7",
 		"@react-aria/visually-hidden": "3.8.18",
+		"@tiptap/core": "3.0.0-next.1",
+		"@tiptap/extension-color": "3.0.0-next.1",
+		"@tiptap/pm": "3.0.0-next.1",
+		"@tiptap/starter-kit": "3.0.0-next.1",
 		"clsx": "2.1.1",
 		"framer-motion": "~11.11.17",
 		"intl-messageformat": "^10.7.7",
@@ -31,6 +37,7 @@
 		"react-dom": "18.3.1"
 	},
 	"devDependencies": {
+		"@eslint/js": "^9.15.0",
 		"@next/eslint-plugin-next": "^15.0.3",
 		"@types/node": "22.9.3",
 		"@types/react": "18.3.12",
@@ -48,10 +55,12 @@
 		"eslint-plugin-react": "^7.37.2",
 		"eslint-plugin-react-hooks": "^5.0.0",
 		"eslint-plugin-unused-imports": "4.1.4",
+		"globals": "^15.12.0",
 		"postcss": "8.4.49",
 		"prettier": "3.3.3",
 		"tailwind-variants": "0.3.0",
 		"tailwindcss": "3.4.15",
-		"typescript": "5.7.2"
+		"typescript": "5.7.2",
+		"typescript-eslint": "^8.15.0"
 	}
 }
