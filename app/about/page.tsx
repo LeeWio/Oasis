@@ -1,4 +1,5 @@
 import { title } from "@/components/primitives";
+import React from "react";
 
 export default function AboutPage() {
   return (

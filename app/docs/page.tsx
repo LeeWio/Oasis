@@ -1,9 +1,13 @@
-import { title } from "@/components/primitives";
+'use client'
+import {Alert} from "@nextui-org/react";
+import React from "react";
 
 export default function DocsPage() {
-  return (
-    <div>
-      <h1 className={title()}>Docs</h1>
-    </div>
-  );
+    const title = "This is an alert";
+    const description = "Thanks for subscribing to our newsletter!";
+    return (
+        <div className="flex items-center justify-center w-full">
+            <Alert title={title} description={description}/>
+        </div>
+    );
 }
