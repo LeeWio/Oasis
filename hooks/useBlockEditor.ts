@@ -1,23 +1,26 @@
-import type { AnyExtension, Editor } from '@tiptap/react'
-import type { Doc as YDoc } from 'yjs'
-import type { EditorUser } from '@/components/BlockEditor/types'
+import type { AnyExtension, Editor } from "@tiptap/react";
+import type { Doc as YDoc } from "yjs";
+import type { EditorUser } from "@/components/BlockEditor/types";
 
-import { useEffect, useState } from 'react'
-import { useEditor, useEditorState } from '@tiptap/react'
-import Collaboration from '@tiptap/extension-collaboration'
-import CollaborationCursor from '@tiptap/extension-collaboration-cursor'
-import { TiptapCollabProvider, WebSocketStatus } from '@hocuspocus/provider'
+import { useEditor, useEditorState } from "@tiptap/react";
+import { useEffect, useState } from "react";
+import Collaboration from "@tiptap/extension-collaboration";
+import CollaborationCursor from "@tiptap/extension-collaboration-cursor";
+import { TiptapCollabProvider, WebSocketStatus } from "@hocuspocus/provider";
+import { debounce } from "lodash";
 
-import { randomElement } from '@/lib/utils'
-import { userColors, userNames } from '@/lib/constants'
-import { ExtensionKit } from '@/extensions/extension-kit'
-import { initialContent } from '@/lib/data/initialContent'
-import { Ai } from '@/extensions/Ai'
-import { AiImage, AiWriter } from '@/extensions'
+import { randomElement } from "@/lib/utils";
+import { userColors, userNames } from "@/lib/constants";
+import { ExtensionKit } from "@/extensions/extension-kit";
+import { Ai } from "@/extensions/Ai";
+import { AiImage, AiWriter } from "@/extensions";
+import { useDraft } from "@/hooks/useDraft";
+import { useAppDispatch } from "@/hooks/store";
+import { updateDraft } from "@/feature/post/postSlice";
 
 declare global {
   interface Window {
-    editor: Editor | null
+    editor: Editor | null;
   }
 }
 
@@ -26,36 +29,49 @@ export const useBlockEditor = ({
   ydoc,
   provider,
   userId,
-  userName = 'Maxi',
+  userName,
 }: {
-  aiToken?: string
-  ydoc: YDoc | null
-  provider?: TiptapCollabProvider | null | undefined
-  userId?: string
-  userName?: string
+  aiToken?: string;
+  ydoc: YDoc | null;
+  provider?: TiptapCollabProvider | null | undefined;
+  userId?: string;
+  userName?: string;
 }) => {
+  const draft = useDraft();
+
+  const dispatch = useAppDispatch();
+
+  const debouncedUpdateDraft = debounce((content: string) => {
+    dispatch(updateDraft({ content }));
+  }, 300);
+
   const [collabState, setCollabState] = useState<WebSocketStatus>(
     provider ? WebSocketStatus.Connecting : WebSocketStatus.Disconnected,
-  )
+  );
 
   const editor = useEditor(
     {
       immediatelyRender: true,
       shouldRerenderOnTransaction: false,
       autofocus: true,
-      onCreate: ctx => {
+      onCreate: (ctx) => {
         if (provider && !provider.isSynced) {
-          provider.on('synced', () => {
+          provider.on("synced", () => {
             setTimeout(() => {
               if (ctx.editor.isEmpty) {
-                ctx.editor.commands.setContent(initialContent)
+                ctx.editor.commands.setContent(draft?.content || "");
               }
-            }, 0)
-          })
+            }, 0);
+          });
         } else if (ctx.editor.isEmpty) {
-          ctx.editor.commands.setContent(initialContent)
-          ctx.editor.commands.focus('start', { scrollIntoView: true })
+          ctx.editor.commands.setContent(draft?.content || "");
+          ctx.editor.commands.focus("start", { scrollIntoView: true });
         }
+      },
+      onUpdate: () => {
+        const content = editor.getHTML();
+
+        debouncedUpdateDraft(content);
       },
       extensions: [
         ...ExtensionKit({
@@ -70,7 +86,7 @@ export const useBlockEditor = ({
           ? CollaborationCursor.configure({
               provider,
               user: {
-                name: randomElement(userNames),
+                name: userName ? userName : randomElement(userNames),
                 color: randomElement(userColors),
               },
             })
@@ -78,53 +94,55 @@ export const useBlockEditor = ({
         aiToken
           ? AiWriter.configure({
               authorId: userId,
-              authorName: userName,
+              authorName: userName ? userName : randomElement(userNames),
             })
           : undefined,
         aiToken
           ? AiImage.configure({
               authorId: userId,
-              authorName: userName,
+              authorName: userName ? userName : randomElement(userNames),
             })
           : undefined,
         aiToken ? Ai.configure({ token: aiToken }) : undefined,
       ].filter((e): e is AnyExtension => e !== undefined),
       editorProps: {
         attributes: {
-          autocomplete: 'off',
-          autocorrect: 'off',
-          autocapitalize: 'off',
-          class: 'min-h-full',
+          autocomplete: "off",
+          autocorrect: "off",
+          autocapitalize: "off",
+          class: "min-h-full",
         },
       },
     },
     [ydoc, provider],
-  )
+  );
   const users = useEditorState({
     editor,
     selector: (ctx): (EditorUser & { initials: string })[] => {
       if (!ctx.editor?.storage.collaborationCursor?.users) {
-        return []
+        return [];
       }
 
-      return ctx.editor.storage.collaborationCursor.users.map((user: EditorUser) => {
-        const names = user.name?.split(' ')
-        const firstName = names?.[0]
-        const lastName = names?.[names.length - 1]
-        const initials = `${firstName?.[0] || '?'}${lastName?.[0] || '?'}`
+      return ctx.editor.storage.collaborationCursor.users.map(
+        (user: EditorUser) => {
+          const names = user.name?.split(" ");
+          const firstName = names?.[0];
+          const lastName = names?.[names.length - 1];
+          const initials = `${firstName?.[0] || "?"}${lastName?.[0] || "?"}`;
 
-        return { ...user, initials: initials.length ? initials : '?' }
-      })
+          return { ...user, initials: initials.length ? initials : "?" };
+        },
+      );
     },
-  })
+  });
 
   useEffect(() => {
-    provider?.on('status', (event: { status: WebSocketStatus }) => {
-      setCollabState(event.status)
-    })
-  }, [provider])
+    provider?.on("status", (event: { status: WebSocketStatus }) => {
+      setCollabState(event.status);
+    });
+  }, [provider]);
 
-  window.editor = editor
+  window.editor = editor;
 
-  return { editor, users, collabState }
-}
+  return { editor, users, collabState };
+};

@@ -1,19 +1,26 @@
 "use client";
 
 import "iframe-resizer/js/iframeResizer.contentWindow";
-import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { BlockEditor } from "@/components/BlockEditor";
 import { useCollaboration } from "@/hooks/useCollaboration";
 
-export default function Room({ params }: { params: { room: string } }) {
+export default function Room({
+  params,
+}: {
+  params: {
+    room: string;
+    isOpen: boolean;
+    onOpenChange: () => void;
+    noCollab: number;
+  };
+}) {
   const [aiToken, setAiToken] = useState<string | null | undefined>();
-  const searchParams = useSearchParams();
 
   const providerState = useCollaboration({
     docId: params.room,
-    enabled: parseInt(searchParams?.get("noCollab") as string) !== 1,
+    enabled: params.noCollab !== 1,
   });
 
   useEffect(() => {
@@ -50,16 +57,15 @@ export default function Room({ params }: { params: { room: string } }) {
 
     dataFetch();
   }, []);
-
   if (providerState.state === "loading" || aiToken === undefined) return;
 
   return (
-    <>
-      <BlockEditor
-        aiToken={aiToken ?? undefined}
-        provider={providerState.provider}
-        ydoc={providerState.yDoc}
-      />
-    </>
+    <BlockEditor
+      aiToken={aiToken ?? undefined}
+      isOpen={params.isOpen}
+      provider={providerState.provider}
+      ydoc={providerState.yDoc}
+      onOpenChange={params.onOpenChange}
+    />
   );
 }
