@@ -47,3 +47,8 @@
 [data-theme='slash-command']::-webkit-scrollbar {
   display: none;
 }
+
+
+.ProseMirror:focus {
+  outline: none;
+}

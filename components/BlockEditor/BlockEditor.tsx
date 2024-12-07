@@ -42,7 +42,7 @@ export const BlockEditor = ({
   isOpen: boolean;
   onOpenChange: () => void;
 }) => {
-  const menuContainerRef = useRef(null);
+  const menuContainerRef = useRef<HTMLDivElement>(null);
 
   // get current user
   const currentUser = useAuth();
@@ -126,7 +126,7 @@ export const BlockEditor = ({
                 <div className="text-xs font-semibold text-neutral-500 dark:text-neutral-400">
                   {words} {words === 1 ? "word" : "words"}
                 </div>
-                <div className="text-xs font-semibold text-neutral-500 dark:text-neutral-400">
+                <div className="text-xs font-semibold text-neutral-500 dark:text-neutral-400 ">
                   {characters} {characters === 1 ? "character" : "characters"}
                 </div>
               </div>
@@ -134,6 +134,9 @@ export const BlockEditor = ({
                 {users.slice(0, 3).map((user: EditorUser) => (
                   <Tooltip
                     key={user.clientId}
+                    classNames={{
+                      content: "text-nowrap",
+                    }}
                     closeDelay={0}
                     content={user.name}
                     delay={0}
@@ -157,6 +160,7 @@ export const BlockEditor = ({
                     }}
                   >
                     <Avatar
+                      key={user.clientId}
                       isBordered
                       color={
                         collabState === WebSocketStatus.Connecting ||

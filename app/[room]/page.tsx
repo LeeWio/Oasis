@@ -13,14 +13,13 @@ export default function Room({
     room: string;
     isOpen: boolean;
     onOpenChange: () => void;
-    noCollab: number;
   };
 }) {
   const [aiToken, setAiToken] = useState<string | null | undefined>();
 
   const providerState = useCollaboration({
     docId: params.room,
-    enabled: params.noCollab !== 1,
+    enabled: process.env.NEXT_PUBLIC_COLLAB === "1",
   });
 
   useEffect(() => {

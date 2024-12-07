@@ -3,6 +3,7 @@
 import { Chip } from "@nextui-org/chip";
 import { startsWith } from "lodash";
 import { cn } from "@nextui-org/theme";
+import React from "react";
 
 type NewChipProps = React.HTMLAttributes<HTMLDivElement>;
 

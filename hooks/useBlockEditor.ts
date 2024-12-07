@@ -43,7 +43,7 @@ export const useBlockEditor = ({
 
   const debouncedUpdateDraft = debounce((content: string) => {
     dispatch(updateDraft({ content }));
-  }, 300);
+  }, 3000);
 
   const [collabState, setCollabState] = useState<WebSocketStatus>(
     provider ? WebSocketStatus.Connecting : WebSocketStatus.Disconnected,

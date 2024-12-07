@@ -383,6 +383,7 @@ const Component: FC<{}> = () => {
   );
 
   const onCategorySelect = useCallback((keys: Selection) => {
+    // @ts-ignore
     const key = Array.from(keys)[0] as CategoryEnum;
 
     setSelectedCategory(key);
