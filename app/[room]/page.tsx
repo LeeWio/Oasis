@@ -61,7 +61,7 @@ export default function Room({
   return (
     <BlockEditor
       aiToken={aiToken ?? undefined}
-      isOpen={params.isOpen}
+      isModalOpen={params.isOpen}
       provider={providerState.provider}
       ydoc={providerState.yDoc}
       onOpenChange={params.onOpenChange}
