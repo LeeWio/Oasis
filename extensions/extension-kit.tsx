@@ -7,6 +7,8 @@ import { ImageUpload } from "./ImageUpload";
 import { TableOfContentsNode } from "./TableOfContentsNode";
 
 import {
+  Alert,
+  Callout,
   CharacterCount,
   Color,
   Column,
@@ -53,6 +55,7 @@ interface ExtensionKitProps {
 
 export const ExtensionKit = ({ provider }: ExtensionKitProps) => [
   Document,
+  Callout,
   Columns,
   TaskList,
   TaskItem.configure({
@@ -90,6 +93,7 @@ export const ExtensionKit = ({ provider }: ExtensionKitProps) => [
   FontSize,
   FontFamily,
   Color,
+  Alert,
   TrailingNode,
   Link.configure({
     openOnClick: false,

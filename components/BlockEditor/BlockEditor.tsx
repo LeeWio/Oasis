@@ -27,7 +27,6 @@ import { cn } from "@nextui-org/theme";
 import { EditorUser } from "./types";
 
 import { useBlockEditor } from "@/hooks/useBlockEditor";
-import ImageBlockMenu from "@/extensions/ImageBlock/components/ImageBlockMenu";
 import { TableColumnMenu, TableRowMenu } from "@/extensions/Table/menus";
 import { ColumnsMenu } from "@/extensions/MultiColumn/menus";
 import { TextMenu } from "@/components/menus/TextMenu";
@@ -35,6 +34,8 @@ import { LinkMenu } from "@/components/menus/LinkMenu";
 import { ContentItemMenu } from "@/components/menus/ContentItemMenu";
 import { useAuth } from "@/hooks/useAuth";
 import { getCollabStateColor } from "@/lib/utils";
+import { CalloutMenu } from "@/extensions/Callout/component/CalloutMenu";
+import { AlertMenu } from "@/extensions/Alert/component/AlertMenu";
 
 export const BlockEditor = ({
   aiToken,
@@ -227,13 +228,15 @@ export const BlockEditor = ({
                 className="overflow-y-auto scrollbar-hide min-h-dvh"
                 editor={editor}
               />
+              <CalloutMenu appendTo={menuContainerRef} editor={editor} />
+              <AlertMenu appendTo={menuContainerRef} editor={editor} />
               <ContentItemMenu editor={editor} />
               <LinkMenu appendTo={menuContainerRef} editor={editor} />
               <TextMenu editor={editor} />
               <ColumnsMenu appendTo={menuContainerRef} editor={editor} />
               <TableRowMenu appendTo={menuContainerRef} editor={editor} />
               <TableColumnMenu appendTo={menuContainerRef} editor={editor} />
-              <ImageBlockMenu appendTo={menuContainerRef} editor={editor} />
+              {/*<ImageBlockMenu appendTo={menuContainerRef} editor={editor} />*/}
             </ModalBody>
             <ModalFooter
               className={cn(
