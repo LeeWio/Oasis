@@ -1,0 +1,6 @@
+@import "./partials/lists.css";
+@import "./partials/typography.css";
+
+.ProseMirror:focus {
+  outline: none;
+}
