@@ -9,6 +9,11 @@ export const useBlockEditor = () => {
     editable: true,
     extensions: [...ExtensionKit()],
     content: "<p>Hello world</p>",
+    editorProps: {
+      attributes: {
+        class: "min-h-dvh outline-none",
+      },
+    },
   });
 
   return { editor };

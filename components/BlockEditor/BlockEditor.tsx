@@ -2,7 +2,6 @@ import "@/styles/index.css";
 
 import { useBlockEditor } from "@/hooks/useBlockEditor";
 import { EditorContent } from "@tiptap/react";
-
 import {
   Modal,
   ModalContent,
@@ -40,7 +39,7 @@ export const BlockEditor = () => {
               <ModalBody>
                 <EditorContent
                   editor={editor}
-                  className="min-h-dvh scrollbar-hide overflow-auto"
+                  className=" scrollbar-hide overflow-auto"
                 />
               </ModalBody>
               <ModalFooter>
