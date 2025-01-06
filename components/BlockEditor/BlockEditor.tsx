@@ -11,6 +11,7 @@ import {
   ModalHeader,
 } from "@nextui-org/modal";
 import { Button } from "@nextui-org/button";
+import { CalloutMenu } from "@/extensions/callout/component/callout-menu";
 
 export const BlockEditor = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -33,10 +34,16 @@ export const BlockEditor = () => {
         <ModalContent>
           {(onClose) => (
             <>
+              <Button
+                onPress={() => editor.chain().focus().toggleCallout().run()}
+              >
+                click
+              </Button>
               <ModalHeader className="flex flex-col gap-1">
                 Modal title
               </ModalHeader>
               <ModalBody>
+                <CalloutMenu editor={editor} />
                 <EditorContent
                   editor={editor}
                   className=" scrollbar-hide overflow-auto"

@@ -1,9 +1,9 @@
-import { StarterKit, Typography, Highlight, CodeBlock } from ".";
+import { StarterKit, Typography, Highlight, Callout } from ".";
 
 export const ExtensionKit = () => [
   Typography,
   Highlight,
-  CodeBlock,
+  Callout,
   StarterKit.configure({
     blockquote: false,
     codeBlock: false,
