@@ -1,6 +1,5 @@
 import "@/styles/index.css";
 
-import { useBlockEditor } from "@/hooks/useBlockEditor";
 import { EditorContent } from "@tiptap/react";
 import {
   Modal,
@@ -11,7 +10,11 @@ import {
   ModalHeader,
 } from "@nextui-org/modal";
 import { Button } from "@nextui-org/button";
+
+import { ContentItemMenu } from "../menus/ContentItemMenu";
+
 import { CalloutMenu } from "@/extensions/callout/component/callout-menu";
+import { useBlockEditor } from "@/hooks/useBlockEditor";
 
 export const BlockEditor = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -23,13 +26,13 @@ export const BlockEditor = () => {
     <>
       <Button onPress={onOpen}>Open Modal</Button>
       <Modal
+        hideCloseButton
+        backdrop="blur"
+        isOpen={isOpen}
         radius="sm"
         scrollBehavior="inside"
-        backdrop="blur"
-        hideCloseButton
-        isOpen={isOpen}
-        onOpenChange={onOpenChange}
         size="5xl"
+        onOpenChange={onOpenChange}
       >
         <ModalContent>
           {(onClose) => (
@@ -43,10 +46,11 @@ export const BlockEditor = () => {
                 Modal title
               </ModalHeader>
               <ModalBody>
+                <ContentItemMenu editor={editor} />
                 <CalloutMenu editor={editor} />
                 <EditorContent
-                  editor={editor}
                   className=" scrollbar-hide overflow-auto"
+                  editor={editor}
                 />
               </ModalBody>
               <ModalFooter>
