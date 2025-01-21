@@ -8,12 +8,12 @@ import {
   NavbarBrand,
   NavbarItem,
   NavbarMenuItem,
-} from "@nextui-org/navbar";
+} from "@heroui/navbar";
 import { AnimatePresence, domAnimation, LazyMotion, m } from "framer-motion";
-import { Button } from "@nextui-org/button";
-import { Kbd } from "@nextui-org/kbd";
-import { Link } from "@nextui-org/link";
-import { link as linkStyles } from "@nextui-org/theme";
+import { Button } from "@heroui/button";
+import { Kbd } from "@heroui/kbd";
+import { Link } from "@heroui/link";
+import { cn, link as linkStyles } from "@heroui/theme";
 import NextLink from "next/link";
 import clsx from "clsx";
 import { removeAuthUser } from "@/feature/auth/authSlice";
@@ -27,7 +27,7 @@ import {
   SearchIcon,
   Logo,
 } from "@/components/icons";
-import { Input } from "@nextui-org/input";
+import { Input } from "@heroui/input";
 import { ChangeEvent, useCallback, useEffect, useMemo, useState } from "react";
 import { isAppleDevice } from "@react-aria/utils";
 import { useAuth } from "@/hooks/useAuth";
@@ -40,24 +40,24 @@ import {
   ModalFooter,
   ModalHeader,
   useDisclosure,
-} from "@nextui-org/modal";
-import { Divider } from "@nextui-org/divider";
+} from "@heroui/modal";
+import { Divider } from "@heroui/divider";
 import {
   useCreateAccountMutation,
   useLazyRequestVerificationCodeQuery,
   UserAuthPayload,
   useValidateCaptchaMutation,
 } from "@/feature/api/authApi";
-import { Tooltip } from "@nextui-org/tooltip";
+import { Tooltip } from "@heroui/tooltip";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
-import { InputOtp } from "@nextui-org/input-otp";
+import { InputOtp } from "@heroui/input-otp";
 import {
   Dropdown,
   DropdownTrigger,
   DropdownItem,
   DropdownMenu,
-} from "@nextui-org/dropdown";
-import { Avatar } from "@nextui-org/avatar";
+} from "@heroui/dropdown";
+import { Avatar } from "@heroui/avatar";
 
 const variants = {
   visible: { opacity: 1, y: 0 },

@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useCallout, UseCalloutProps } from "./use-callout";
-import { forwardRef } from "@nextui-org/system";
+import { forwardRef } from "@heroui/system";
 
 export interface CalloutProps extends UseCalloutProps {}
 

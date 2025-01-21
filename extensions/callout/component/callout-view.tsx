@@ -4,8 +4,8 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
-} from "@nextui-org/dropdown";
-import { CopyDocumentBulkIcon } from "@nextui-org/shared-icons";
+} from "@heroui/dropdown";
+import { CopyDocumentBulkIcon } from "@heroui/shared-icons";
 import { NodeViewContent, NodeViewProps, NodeViewWrapper } from "@tiptap/react";
 
 export const CalloutView: React.FC<NodeViewProps> = ({ node, editor }) => {

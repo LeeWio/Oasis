@@ -1,7 +1,7 @@
 "use client";
 import Callout from "@/components/callout/src/callout";
 import { title } from "@/components/primitives";
-import { Snippet } from "@nextui-org/snippet";
+import { Snippet } from "@heroui/snippet";
 
 export default function BlogPage() {
   return (

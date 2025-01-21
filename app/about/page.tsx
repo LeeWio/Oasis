@@ -1,11 +1,15 @@
 "use client";
 
-import { BlockEditor } from "@/components/BlockEditor/BlockEditor";
+import { title } from "@/components/primitives";
 
 export default function AboutPage() {
   return (
-    <div>
-      <BlockEditor />
+    <div className="">
+      <span className={title({ color: "foreground", size: "lg" })}>
+        be
+        betteraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"w-screen"
+        <br /> for better
+      </span>
     </div>
   );
 }

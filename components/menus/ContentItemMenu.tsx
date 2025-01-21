@@ -8,9 +8,9 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
-} from "@nextui-org/dropdown";
+} from "@heroui/dropdown";
 import { Icon } from "@iconify/react";
-import { Button } from "@nextui-org/button";
+import { Button } from "@heroui/button";
 
 export type ContentItemMenuProps = {
   editor: Editor;

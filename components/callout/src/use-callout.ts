@@ -1,43 +1,16 @@
 import type { CalloutVariantProps } from "@/core/theme/src";
 import type { ReactNode } from "react";
 
-import { TooltipProps } from "@nextui-org/tooltip";
 import { callout } from "@/core/theme/src";
-import { ReactRef } from "@nextui-org/react-utils";
+import { ReactRef } from "@heroui/react-utils";
+import { clsx, objectToDeps } from "@heroui/shared-utils";
 import {
   HTMLNextUIProps,
   mapPropsVariants,
   PropGetter,
-  useProviderContext,
-} from "@nextui-org/system";
-import { SlotsToClasses } from "@nextui-org/theme";
-import { ButtonProps } from "@nextui-org/button";
-import { useDOMRef, filterDOMProps } from "@nextui-org/react-utils";
-import { useMemo, useCallback, ReactElement } from "react";
-import { useClipboard } from "@nextui-org/use-clipboard";
-import { useFocusRing } from "@react-aria/focus";
-import { clsx, dataAttr, objectToDeps } from "@nextui-org/shared-utils";
-import { isValidElement, cloneElement } from "react";
-import { start } from "repl";
+} from "@heroui/system";
 
-// export interface UseCalloutProps
-//   extends Omit<HTMLNextUIProps, "onCopy">,
-//     CalloutVariantProps {
-//   /**
-//    * Ref to the DOM node.
-//    */
-//   ref?: ReactRef<HTMLDivElement | null>;
-//
-//   /**
-//    * The content of the callout
-//    */
-//   children?: React.ReactNode | string;
-//
-//   /**
-//    * The button start content.
-//    */
-//   startContent?: ReactNode;
-// }
+import { cloneElement, isValidElement, useMemo } from "react";
 
 export interface UseCalloutProps
   extends HTMLNextUIProps<"div">,

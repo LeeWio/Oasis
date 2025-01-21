@@ -6,8 +6,8 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
-} from "@nextui-org/dropdown";
-import { Button } from "@nextui-org/button";
+} from "@heroui/dropdown";
+import { Button } from "@heroui/button";
 import { CalloutVariantProps } from "@/core/theme/src";
 
 export const CalloutMenu = ({ editor }: MenuProps) => {

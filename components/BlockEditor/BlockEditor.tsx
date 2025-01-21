@@ -8,8 +8,8 @@ import {
   ModalFooter,
   useDisclosure,
   ModalHeader,
-} from "@nextui-org/modal";
-import { Button } from "@nextui-org/button";
+} from "@heroui/modal";
+import { Button } from "@heroui/button";
 
 import { ContentItemMenu } from "../menus/ContentItemMenu";
 

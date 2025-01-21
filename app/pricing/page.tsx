@@ -1,9 +1,10 @@
-import { title } from "@/components/primitives";
+"use client";
+import { BlockEditor } from "@/components/BlockEditor/BlockEditor";
 
 export default function PricingPage() {
   return (
     <div>
-      <h1 className={title()}>Pricing</h1>
+      <BlockEditor />
     </div>
   );
 }
