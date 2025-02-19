@@ -20,7 +20,7 @@ import { Input } from "@heroui/input";
 import { ChangeEvent, useCallback, useEffect, useMemo, useState } from "react";
 import { isAppleDevice } from "@react-aria/utils";
 import { Icon } from "@iconify/react";
-import { ToastProvider } from "@heroui/toast";
+import { addToast, ToastProvider } from "@heroui/toast";
 import {
   Modal,
   ModalBody,
@@ -133,7 +133,10 @@ export const Navbar = () => {
     } catch {
       const error = requestVerificationCodeError as FetchBaseQueryError;
 
-      alert(error?.data);
+      addToast({
+        title: error?.status || "failed",
+        color: "danger",
+      });
     }
   };
 
@@ -146,10 +149,12 @@ export const Navbar = () => {
         setIsFormVisible(false);
         setIsSignUp(false);
         paginate(0);
-        alert("登陆成功");
       }
     } catch (err) {
-      alert(error);
+      addToast({
+        color: "danger",
+        title: error,
+      });
     }
   };
 
@@ -192,7 +197,10 @@ export const Navbar = () => {
   const handleCreateAccount = async (e: React.FormEvent) => {
     e.preventDefault();
     if (userAuthPayload.password !== userAuthPayload.confirmPassword) {
-      alert("Passwords do not match.");
+      addToast({
+        title: "Passwords do not match.",
+        color: "danger",
+      });
 
       return; // 阻止表单提交
     }

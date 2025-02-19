@@ -1,9 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { addToast } from "@heroui/toast";
 
 import { RootState } from "@/app/store";
 import { AuthUser, setAuthUser } from "@/feature/auth/authSlice";
 import { ResultResponse } from "@/types";
-import Error from "@/app/error";
 
 /**
  * User Authentication Payload
@@ -48,14 +48,19 @@ export const authApi = createApi({
           const { data } = response;
 
           if (!data) {
-            throw new Error("Invalid data");
+            addToast({
+              title: "Invalid data",
+              timeout: 3000,
+              shouldShowTimeoutProgess: true,
+            });
           }
 
           return data;
         } else {
-          alert(response.message);
+          addToast({
+            title: response.message || "Authentication failed",
+          });
           // Handle various error cases based on status code or message
-          throw new Error(response.message || "Authentication failed");
         }
       },
       transformErrorResponse: (response: { status: string | number }) => {
@@ -91,13 +96,16 @@ export const authApi = createApi({
           const { data } = response;
 
           if (!data || !data.authorization) {
-            throw new Error("Invalid authentication response data");
+            addToast({
+              title: "Invalid authentication response data",
+            });
           }
 
           return data;
         } else {
-          alert(response.message);
-          throw new Error(response.message || "validate failed.");
+          addToast({
+            title: response.message || "validate failed.",
+          });
         }
       },
       transformErrorResponse: (response: { status: string | number }) => {
@@ -129,14 +137,31 @@ export const authApi = createApi({
           if (data && data.authorization) {
             // upon successful authentication, store the user information in the Redux state
             dispatch(setAuthUser(data)); // store the authenticated user details in the state
+            addToast({
+              color: "primary",
+              title: "welcom back",
+              description: data.username,
+              timeout: 3000,
+              shouldShowTimeoutProgess: true,
+            });
           } else {
-            throw new Error("Invalid authentication response data");
+            addToast({
+              color: "danger",
+              title: "Invalid authentication response data",
+              timeout: 3000,
+              shouldShowTimeoutProgess: true,
+            });
           }
           // You can perform other actions here, such as redirecting to the user dashboard
           // router.push('/dashboard'); // Example: redirect to dashboard
         } catch (error) {
           // handle authentication failure
-          console.error("Authentication failed:", error);
+          addToast({
+            color: "danger",
+            title: "Authentication failed: " + error,
+            timeout: 3000,
+            shouldShowTimeoutProgess: true,
+          });
           // you can process the error or display an error message here
         }
       },
@@ -153,14 +178,22 @@ export const authApi = createApi({
           const { data } = response;
 
           if (!data || !data.authorization) {
-            throw new Error("Invalid authentication response data");
+            addToast({
+              color: "danger",
+              title: "Invalid authentication response data",
+              timeout: 3000,
+              shouldShowTimeoutProgess: true,
+            });
           }
 
           return data;
         } else {
-          alert(response.message);
-          // Handle various error cases based on status code or message
-          throw new Error(response.message || "Authentication failed");
+          addToast({
+            color: "danger",
+            title: response.message,
+            timeout: 3000,
+            shouldShowTimeoutProgess: true,
+          });
         }
       },
       // Optional, for error response handling
@@ -195,14 +228,29 @@ export const authApi = createApi({
           if (data && data.authorization) {
             // upon successful authentication, store the user information in the Redux state
             dispatch(setAuthUser(data)); // store the authenticated user details in the state
+            addToast({
+              title: "welcom back",
+              description: data.username,
+              timeout: 3000,
+              shouldShowTimeoutProgess: true,
+            });
           } else {
-            throw new Error("Invalid authentication response data");
+            addToast({
+              color: "danger",
+              title: "Invalid authentication response data",
+              timeout: 3000,
+              shouldShowTimeoutProgess: true,
+            });
           }
           // You can perform other actions here, such as redirecting to the user dashboard
           // router.push('/dashboard'); // Example: redirect to dashboard
         } catch (error) {
-          // handle authentication failure
-          console.error("Authentication failed:", error);
+          addToast({
+            color: "danger",
+            title: "Authentication failed:" + error,
+            timeout: 3000,
+            shouldShowTimeoutProgess: true,
+          });
           // you can process the error or display an error message here
         }
       },
@@ -218,8 +266,13 @@ export const authApi = createApi({
           // Registration successful response, no data needs to be returned
           return response.message; // Returning undefined or any indicator of success
         } else {
+          addToast({
+            color: "danger",
+            title: response.message || "Registration failed",
+            timeout: 3000,
+            shouldShowTimeoutProgess: true,
+          });
           // Handle failure response
-          throw new Error(response.message || "Registration failed");
         }
       },
       transformErrorResponse: (error) => {
@@ -255,8 +308,12 @@ export const authApi = createApi({
           // Example: Redirecting to the login page or welcome page after successful registration
           // router.push('/welcome'); // Example: redirect to a welcome page
         } catch (error) {
-          // Handle registration failure
-          console.error("Registration failed:", error);
+          addToast({
+            color: "danger",
+            title: "Registration failed: " + error,
+            timeout: 3000,
+            shouldShowTimeoutProgess: true,
+          });
           // Optionally, you can display error messages to the user here
         }
       },

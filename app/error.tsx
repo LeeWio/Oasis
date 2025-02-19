@@ -1,5 +1,6 @@
 "use client";
 
+import { addToast } from "@heroui/toast";
 import { useEffect } from "react";
 
 export default function Error({
@@ -10,7 +11,11 @@ export default function Error({
   reset: () => void;
 }) {
   useEffect(() => {
-    alert(error);
+    addToast({
+      title: error.name,
+      description: error.message,
+      color: "danger",
+    });
   }, [error]);
 
   return (
