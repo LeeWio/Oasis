@@ -13,41 +13,22 @@ import { AnimatePresence, domAnimation, LazyMotion, m } from "framer-motion";
 import { Button } from "@heroui/button";
 import { Kbd } from "@heroui/kbd";
 import { Link } from "@heroui/link";
-import { cn, link as linkStyles } from "@heroui/theme";
+import { link as linkStyles } from "@heroui/theme";
 import NextLink from "next/link";
 import clsx from "clsx";
-import { removeAuthUser } from "@/feature/auth/authSlice";
-
-import { siteConfig } from "@/config/site";
-import { ThemeSwitch } from "@/components/theme-switch";
-import {
-  TwitterIcon,
-  GithubIcon,
-  DiscordIcon,
-  SearchIcon,
-  Logo,
-} from "@/components/icons";
 import { Input } from "@heroui/input";
 import { ChangeEvent, useCallback, useEffect, useMemo, useState } from "react";
 import { isAppleDevice } from "@react-aria/utils";
-import { useAuth } from "@/hooks/useAuth";
-import { useAppDispatch } from "@/hooks/store";
 import { Icon } from "@iconify/react";
+import { ToastProvider } from "@heroui/toast";
 import {
   Modal,
   ModalBody,
   ModalContent,
-  ModalFooter,
   ModalHeader,
   useDisclosure,
 } from "@heroui/modal";
 import { Divider } from "@heroui/divider";
-import {
-  useCreateAccountMutation,
-  useLazyRequestVerificationCodeQuery,
-  UserAuthPayload,
-  useValidateCaptchaMutation,
-} from "@/feature/api/authApi";
 import { Tooltip } from "@heroui/tooltip";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { InputOtp } from "@heroui/input-otp";
@@ -58,6 +39,26 @@ import {
   DropdownMenu,
 } from "@heroui/dropdown";
 import { Avatar } from "@heroui/avatar";
+
+import {
+  useCreateAccountMutation,
+  useLazyRequestVerificationCodeQuery,
+  UserAuthPayload,
+  useValidateCaptchaMutation,
+} from "@/feature/api/authApi";
+import { useAppDispatch } from "@/hooks/store";
+import { useAuth } from "@/hooks/useAuth";
+import {
+  TwitterIcon,
+  GithubIcon,
+  DiscordIcon,
+  SearchIcon,
+  Logo,
+} from "@/components/icons";
+import { siteConfig } from "@/config/site";
+import { ThemeSwitch } from "@/components/theme-switch";
+import { removeAuthUser } from "@/feature/auth/authSlice";
+import { useToast } from "@/hooks/useToast";
 
 const variants = {
   visible: { opacity: 1, y: 0 },
@@ -131,6 +132,7 @@ export const Navbar = () => {
       paginate(1);
     } catch {
       const error = requestVerificationCodeError as FetchBaseQueryError;
+
       alert(error?.data);
     }
   };
@@ -138,6 +140,7 @@ export const Navbar = () => {
   const handleValidateCaptchaSubmit = async () => {
     try {
       const result = await validateCaptcha(userAuthPayload).unwrap();
+
       if (result) {
         onOpenChange();
         setIsFormVisible(false);
@@ -234,24 +237,27 @@ export const Navbar = () => {
       className="bg-default-100 text-sm text-default-500"
       endContent={
         <Kbd
-          className="hidden bg-transparent px-2 py-0.5 shadow-none lg:inline-block"
           key={commandKey}
+          className="hidden bg-transparent px-2 py-0.5 shadow-none lg:inline-block"
         >
           K
         </Kbd>
       }
       size="md"
-      value={"flat"}
       startContent={
         <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
       }
+      value={"flat"}
     >
       Quick Search...
     </Button>
   );
 
+  const toast = useToast();
+
   return (
     <>
+      <ToastProvider {...toast} />
       <NextUINavbar maxWidth="xl" position="sticky">
         <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
           <NavbarBrand as="li" className="gap-3 max-w-fit">
@@ -373,6 +379,7 @@ export const Navbar = () => {
             ) : (
               <Button
                 as={Link}
+                className="text-sm font-normal text-default-600 bg-default-100"
                 endContent={
                   <span className="pointer-events-none flex h-[22px] w-[22px] items-center justify-center rounded-full bg-default-100">
                     <Icon
@@ -382,7 +389,6 @@ export const Navbar = () => {
                     />
                   </span>
                 }
-                className="text-sm font-normal text-default-600 bg-default-100"
                 variant="flat"
                 onPress={onOpen}
               >
@@ -424,10 +430,10 @@ export const Navbar = () => {
         </NavbarMenu>
       </NextUINavbar>
       <Modal
-        isOpen={isOpen}
-        onOpenChange={onOpenChange}
         hideCloseButton
+        isOpen={isOpen}
         size="sm"
+        onOpenChange={onOpenChange}
       >
         <ModalContent>
           {() => (
@@ -513,8 +519,8 @@ export const Navbar = () => {
                           <Button
                             fullWidth
                             color="primary"
-                            type="submit"
                             isLoading={isCreateAccountLoading}
+                            type="submit"
                           >
                             Sign Up
                           </Button>
@@ -569,30 +575,30 @@ export const Navbar = () => {
                               )}
                               {page === 1 && (
                                 <InputOtp
-                                  className="mx-auto"
                                   isRequired
-                                  size="lg"
-                                  color="success"
                                   aria-label="verificationCode input field"
-                                  placeholder="Enter verificationCode"
-                                  validationBehavior="native"
+                                  className="mx-auto"
+                                  color="success"
                                   length={6}
+                                  placeholder="Enter verificationCode"
+                                  size="lg"
+                                  validationBehavior="native"
                                   value={userAuthPayload.verificationCode}
+                                  onComplete={handleValidateCaptchaSubmit}
                                   onValueChange={(value) =>
                                     handleValueChange({
                                       name: "verificationCode",
                                       value,
                                     })
                                   }
-                                  onComplete={handleValidateCaptchaSubmit}
                                 />
                               )}
                               {page == 0 && (
                                 <Button
                                   fullWidth
                                   color="primary"
-                                  type="submit"
                                   isLoading={isRequestVerificationCodeLoading}
+                                  type="submit"
                                 >
                                   Continue with Email
                                 </Button>
@@ -603,8 +609,8 @@ export const Navbar = () => {
                       )}
                       {orDivider}
                       <Button
-                        className="mb-3"
                         fullWidth
+                        className="mb-3"
                         startContent={
                           <Icon
                             className="text-default-500"

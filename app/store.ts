@@ -5,6 +5,7 @@ import createWebStorage from "redux-persist/lib/storage/createWebStorage";
 
 import authReducer from "@/feature/auth/authSlice";
 import postReducer from "@/feature/post/postSlice";
+import toastReducer from "@/feature/util/toastSlice";
 import { authApi } from "@/feature/api/authApi";
 
 const createNoopStorage = () => {
@@ -39,6 +40,7 @@ const middleware = [authApi.middleware];
 const rootReducer = combineReducers({
   auth: authReducer, // The authentication reducer that manages auth state
   post: postReducer,
+  toast: toastReducer,
   [authApi.reducerPath]: authApi.reducer,
 });
 
