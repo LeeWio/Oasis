@@ -27,7 +27,7 @@ const data: CircleChartProps[] = [
 export default function Home() {
   return (
     <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-      <div className="flex flex-row justify-center w-full space-x-6">
+      <div className="flex w-full flex-row justify-center space-x-6">
         <CircleChartCard {...data[0]} className="w-64" />
 
         <Card className="flex-[2]">

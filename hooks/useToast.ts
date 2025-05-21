@@ -1,9 +1,9 @@
-import { useMemo } from "react";
+import { useMemo } from 'react'
 
-import { useAppSelector } from "./store";
+import { useAppSelector } from './store'
 
 export const useToast = () => {
-  const toast = useAppSelector((state) => state.toast);
+  const toast = useAppSelector(state => state.toast)
 
-  return useMemo(() => toast, [toast]);
-};
+  return useMemo(() => toast, [toast])
+}

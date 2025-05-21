@@ -1,14 +1,14 @@
-@import "./partials/animations.css";
-@import "./partials/blocks.css";
-@import "./partials/code.css";
-@import "./partials/collab.css";
-@import "./partials/lists.css";
-@import "./partials/placeholder.css";
-@import "./partials/table.css";
-@import "./partials/typography.css";
+@import './partials/animations.css';
+@import './partials/blocks.css';
+@import './partials/code.css';
+@import './partials/collab.css';
+@import './partials/lists.css';
+@import './partials/placeholder.css';
+@import './partials/table.css';
+@import './partials/typography.css';
 
 .ProseMirror {
-  @apply caret-black dark:caret-white outline-0 z-0 mx-auto;
+  @apply z-0 mx-auto caret-black outline-0 dark:caret-white;
 
   .selection {
     @apply inline;
@@ -16,7 +16,7 @@
 
   .selection,
   *::selection {
-    @apply bg-black/10 dark:bg-white/20 inline;
+    @apply inline bg-black/10 dark:bg-white/20;
   }
 
   & > .react-renderer {
@@ -28,10 +28,10 @@
   }
 
   .ProseMirror-gapcursor {
-    @apply relative w-full max-w-2xl mx-auto;
+    @apply relative mx-auto w-full max-w-2xl;
 
     &:after {
-      @apply border-t-black/40 dark:border-t-white/40 w-full -top-[1.5em] max-w-2xl mx-auto left-0 right-0;
+      @apply -top-[1.5em] left-0 right-0 mx-auto w-full max-w-2xl border-t-black/40 dark:border-t-white/40;
     }
   }
 }
@@ -40,6 +40,6 @@
   outline: none;
 }
 
-[data-theme="slash-command"] {
+[data-theme='slash-command'] {
   width: 1000vw;
 }

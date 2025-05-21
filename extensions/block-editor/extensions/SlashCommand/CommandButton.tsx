@@ -22,9 +22,9 @@ export const CommandButton = forwardRef<HTMLButtonElement, CommandButtonProps>(
     return (
       <Button
         ref={ref}
-        onPress={onClick}
         className={wrapperClass}
-        startContent={<Icon icon={icon.icon} className="w-3 h-3" />}
+        startContent={<Icon className="h-3 w-3" icon={icon.icon} />}
+        onPress={onClick}
       >
         {title}
       </Button>

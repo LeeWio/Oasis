@@ -4,6 +4,7 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
 
 import toastReducer from "@/feature/util/toastSlice";
+import authReducer from "@/feature/auth/authSlice";
 
 const createNoopStorage = () => {
   return {
@@ -39,6 +40,7 @@ const middleware = [];
 // Combine all reducers, combining different slices of state into one main rootReducer
 const rootReducer = combineReducers({
   toast: toastReducer,
+  auth: authReducer,
 });
 
 // Apply the persistReducer function to enable persistence for the root reducer
