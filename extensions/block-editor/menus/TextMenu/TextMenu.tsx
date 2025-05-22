@@ -1,35 +1,38 @@
-import { memo } from 'react'
-import { MenuProps } from '../types'
-import { useTextmenuCommands } from './hooks/useTextmenuCommands'
-import { useTextmenuStates } from './hooks/useTextmenuStates'
-import { useTextmenuContentTypes } from './hooks/useTextmenuContentTypes'
-import { BubbleMenu } from '@tiptap/react/menus'
-import TextMenuItem from './components/TextMenuItem'
-import PopoverFilterWrapper from '../../panels/ColorPicker/PopoverFilterWrapper'
-import ColorButton from '../../panels/ColorPicker/ColorButton'
-import { Divider } from '@heroui/divider'
+import { memo } from "react";
+import { MenuProps } from "../types";
+import { useTextmenuCommands } from "./hooks/useTextmenuCommands";
+import { useTextmenuStates } from "./hooks/useTextmenuStates";
+import { useTextmenuContentTypes } from "./hooks/useTextmenuContentTypes";
+import { BubbleMenu } from "@tiptap/react/menus";
+import TextMenuItem from "./components/TextMenuItem";
+import PopoverFilterWrapper from "../../panels/ColorPicker/PopoverFilterWrapper";
+import ColorButton from "../../panels/ColorPicker/ColorButton";
+import { Divider } from "@heroui/divider";
 
-const MemoButton = memo(TextMenuItem)
-const MemoColorPicker = memo(PopoverFilterWrapper)
-const MemoColorButton = memo(ColorButton)
+const MemoButton = memo(TextMenuItem);
+const MemoColorPicker = memo(PopoverFilterWrapper);
+const MemoColorButton = memo(ColorButton);
 
 const COLORS = [
-  { color: '#71C0BB', tooltip: 'Teal', value: 'teal' },
-  { color: '#F31260', tooltip: 'Red', value: 'red' },
-  { color: '#006FEE', tooltip: 'Blue', value: 'blue' },
-  { color: '#17C964', tooltip: 'Green', value: 'green' },
-  { color: '#F5A524', tooltip: 'Yellow', value: 'yellow' },
-  { color: '#332D56', tooltip: 'Navy', value: 'navy' },
-  // { color: "#ffffff", tooltip: "White", value: "white" },
-]
+  { color: "#71C0BB", tooltip: "Teal", value: "teal" },
+  { color: "#F31260", tooltip: "Red", value: "red" },
+  { color: "#006FEE", tooltip: "Blue", value: "blue" },
+  { color: "#17C964", tooltip: "Green", value: "green" },
+  { color: "#F5A524", tooltip: "Yellow", value: "yellow" },
+  { color: "#332D56", tooltip: "Navy", value: "navy" },
+];
 
 export const TextMenu = ({ editor }: MenuProps) => {
-  const commands = useTextmenuCommands(editor)
-  const states = useTextmenuStates(editor)
-  const blockOptions = useTextmenuContentTypes(editor)
+  const commands = useTextmenuCommands(editor);
+  const states = useTextmenuStates(editor);
+  const blockOptions = useTextmenuContentTypes(editor);
 
   return (
-    <BubbleMenu pluginKey="textMenu" editor={editor} shouldShow={states.shouldShow}>
+    <BubbleMenu
+      pluginKey="textMenu"
+      editor={editor}
+      shouldShow={states.shouldShow}
+    >
       <div
         aria-label="Column layout options"
         className="z-10 inline-flex w-full flex-row items-center justify-center gap-0.5 rounded-md bg-content1 px-1.5 py-0.5 shadow-medium"
@@ -75,7 +78,11 @@ export const TextMenu = ({ editor }: MenuProps) => {
             />
           ))}
           <Divider orientation="vertical" className="h-6" />
-          <MemoButton icon="lucide:circle-off" onPress={commands.onClearColor} value="None" />
+          <MemoButton
+            icon="lucide:circle-off"
+            onPress={commands.onClearColor}
+            value="None"
+          />
         </MemoColorPicker>
 
         <MemoColorPicker icon="fa6-solid:highlighter">
@@ -89,9 +96,55 @@ export const TextMenu = ({ editor }: MenuProps) => {
             />
           ))}
           <Divider orientation="vertical" className="h-6" />
-          <MemoButton icon="lucide:circle-off" onPress={commands.onClearHighlight} value="None" />
+          <MemoButton
+            icon="lucide:circle-off"
+            onPress={commands.onClearHighlight}
+            value="None"
+          />
+        </MemoColorPicker>
+
+        <Divider orientation="vertical" className="h-6 mx-1" />
+
+        <MemoColorPicker icon="fa6-solid:ellipsis-vertical">
+          <MemoButton
+            onPress={commands.onSubscript}
+            isSelected={states.isSubscript}
+            value="Subscript"
+            icon="lucide:subscript"
+          />
+          <MemoButton
+            onPress={commands.onSuperscript}
+            isSelected={states.isSuperscript}
+            value="Superscript"
+            icon="lucide:superscript"
+          />
+          <Divider orientation="vertical" className="h-6" />
+          <MemoButton
+            onPress={commands.onAlignLeft}
+            isSelected={states.isAlignLeft}
+            value="AlignLeft"
+            icon="lucide:align-left"
+          />
+          <MemoButton
+            onPress={commands.onAlignCenter}
+            isSelected={states.isAlignCenter}
+            value="AlignCenter"
+            icon="lucide:align-center"
+          />
+          <MemoButton
+            onPress={commands.onAlignRight}
+            isSelected={states.isAlignRight}
+            value="AlignRight"
+            icon="lucide:align-right"
+          />
+          <MemoButton
+            onPress={commands.onAlignJustify}
+            isSelected={states.isAlignJustify}
+            value="AlignJustify"
+            icon="lucide:align-justify"
+          />
         </MemoColorPicker>
       </div>
     </BubbleMenu>
-  )
-}
+  );
+};
