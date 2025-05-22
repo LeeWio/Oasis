@@ -1,9 +1,9 @@
-import { BlockEditor } from "@/components/block-editor";
+import { BlockEditor } from '@/components/block-editor'
 
 export default function PricingPage() {
   return (
     <div>
       <BlockEditor />
     </div>
-  );
+  )
 }

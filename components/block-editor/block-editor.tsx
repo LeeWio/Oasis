@@ -1,6 +1,6 @@
 'use client'
 
-import { EditorContent } from '@tiptap/react'
+import { EditorContent, useEditorState } from '@tiptap/react'
 import { useRef } from 'react'
 import {
   ModalHeader,
@@ -25,6 +25,17 @@ export const BlockEditor = ({}: BlockEditorProps) => {
   const menuContainerRef = useRef<HTMLDivElement>(null)
 
   const { editor } = useBlockEditor()
+
+  const { characters, words } = useEditorState({
+    editor,
+    selector: (ctx): { characters: number; words: number } => {
+      const { characters, words } = ctx.editor?.storage.characterCount || {
+        characters: () => 0,
+        words: () => 0,
+      }
+      return { characters: characters(), words: words() }
+    },
+  })
 
   if (!editor) {
     return null

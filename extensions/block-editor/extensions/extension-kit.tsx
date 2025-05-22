@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 import {
   ListKit,
@@ -6,35 +6,45 @@ import {
   StarterKit,
   Column,
   Columns,
+  CharacterCount,
   Details,
   Highlight,
   DetailsContent,
   Mathematics,
   DetailsSummary,
   Table,
+  Selection,
   Subscript,
   Superscript,
   TextAlign,
-} from ".";
+} from '.'
 
 export const ExtensionKit = () => [
   Column,
   Mathematics,
-  ListKit,
+  ListKit.configure({
+    taskItem: {
+      nested: true,
+    },
+  }),
   Subscript,
+  CharacterCount.configure({
+    limit: 5000,
+  }),
   Columns,
+  Selection,
   Highlight.configure({
     multicolor: true,
   }),
   Superscript,
   TextAlign.configure({
-    types: ["heading", "paragraph"],
+    types: ['heading', 'paragraph'],
   }),
   TextStyleKit,
   Details.configure({
     persist: true,
     HTMLAttributes: {
-      class: "details",
+      class: 'details',
     },
   }),
   DetailsContent,
@@ -45,6 +55,6 @@ export const ExtensionKit = () => [
     orderedList: false,
     bulletList: false,
   }),
-];
+]
 
-export default ExtensionKit;
+export default ExtensionKit
