@@ -77,6 +77,20 @@ export const TextMenu = ({ editor }: MenuProps) => {
           <Divider orientation="vertical" className="h-6" />
           <MemoButton icon="lucide:circle-off" onPress={commands.onClearColor} value="None" />
         </MemoColorPicker>
+
+        <MemoColorPicker icon="fa6-solid:highlighter">
+          {COLORS.map(({ color, value, tooltip }) => (
+            <MemoColorButton
+              tooltip={tooltip}
+              key={value}
+              onPress={commands.onChangeHighlight}
+              color={color}
+              isSelected={states.currentHighlight === color}
+            />
+          ))}
+          <Divider orientation="vertical" className="h-6" />
+          <MemoButton icon="lucide:circle-off" onPress={commands.onClearHighlight} value="None" />
+        </MemoColorPicker>
       </div>
     </BubbleMenu>
   )
