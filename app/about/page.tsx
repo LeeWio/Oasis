@@ -1,3 +1,9 @@
+import { Input } from '@heroui/input'
+
 export default function AboutPage() {
-  return <div>adsf</div>
+  return (
+    <div className="w-[100px]">
+      <Input />
+    </div>
+  )
 }

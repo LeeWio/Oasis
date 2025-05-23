@@ -9,6 +9,13 @@ import {
   CharacterCount,
   Details,
   Highlight,
+  Dropcursor,
+  Placeholder,
+  BlockquoteFigure,
+  Figcaption,
+  Link,
+  Focus,
+  Typography,
   DetailsContent,
   Mathematics,
   DetailsSummary,
@@ -17,10 +24,17 @@ import {
   Subscript,
   Superscript,
   TextAlign,
+  CodeBlock,
+  // UniqueID,
 } from '.'
 
 export const ExtensionKit = () => [
   Column,
+  CodeBlock,
+  Typography,
+  Focus,
+  Figcaption,
+  BlockquoteFigure,
   Mathematics,
   ListKit.configure({
     taskItem: {
@@ -29,8 +43,12 @@ export const ExtensionKit = () => [
   }),
   Subscript,
   CharacterCount.configure({
-    limit: 5000,
+    limit: 50000,
   }),
+  // UniqueID.configure({
+  //   types: ['paragraph', 'heading', 'blockquote', 'codeBlock', 'table'],
+  //   filterTransaction: transaction => !isChangeOrigin(transaction),
+  // }),
   Columns,
   Selection,
   Highlight.configure({
@@ -50,10 +68,23 @@ export const ExtensionKit = () => [
   DetailsContent,
   DetailsSummary,
   Table,
+  Placeholder.configure({
+    includeChildren: true,
+    showOnlyCurrent: false,
+    placeholder: () => '',
+  }),
   StarterKit.configure({
     listItem: false,
     orderedList: false,
     bulletList: false,
+    link: false,
+  }),
+  Dropcursor.configure({
+    width: 2,
+    class: 'ProseMirror-dropcursor border-black',
+  }),
+  Link.configure({
+    openOnClick: false,
   }),
 ]
 

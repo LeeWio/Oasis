@@ -1,33 +1,31 @@
 'use client'
 
 import React from 'react'
-import { Icon } from '@iconify/react'
 import { PopoverContent, Popover, PopoverTrigger, PopoverProps } from '@heroui/popover'
-import { Button } from '@heroui/button'
 import { useDisclosure } from '@heroui/use-disclosure'
+import { MemoButton } from '../../menus/TextMenu'
 
 export type PopoverFilterWrapperProps = Omit<PopoverProps, 'children'> & {
   title?: string
   children: React.ReactNode
   icon?: string
+  className?: string
 }
 
 const PopoverFilterWrapper = React.forwardRef<HTMLDivElement, PopoverFilterWrapperProps>(
-  ({ title, children, icon, ...props }, ref) => {
+  ({ title, children, icon, className, ...props }, ref) => {
     const { isOpen, onOpenChange } = useDisclosure()
     return (
-      <Popover ref={ref} isOpen={isOpen} onOpenChange={onOpenChange} {...props} radius="sm">
+      <Popover ref={ref} isOpen={isOpen} onOpenChange={onOpenChange} {...props}>
         <PopoverTrigger>
-          <Button isIconOnly disableRipple size="sm" variant="light">
-            {icon ? <Icon fontSize={20} icon={icon} /> : title}
-          </Button>
+          <MemoButton icon={icon} value={title} />
         </PopoverTrigger>
 
         <PopoverContent className="flex max-w-2xl flex-col items-center gap-2">
           {title ? (
             <span className="mb-2 text-medium font-medium text-default-600">{title}</span>
           ) : null}
-          <div className="flex items-center gap-1">{children}</div>
+          <div className={className ?? 'flex w-full flex-col gap-2'}>{children}</div>
         </PopoverContent>
       </Popover>
     )

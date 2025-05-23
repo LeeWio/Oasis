@@ -1,14 +1,14 @@
 import { Editor } from '@tiptap/react'
 
-import {} from // AiWriter,
-// AiImage,
-// Figcaption,
-// HorizontalRule,
-// ImageBlock,
-// ImageUpload,
-// Link,
-// CodeBlock,
-'../../extensions/'
+import {
+  CodeBlock, // AiWriter,
+  // AiImage,
+  // Figcaption,
+  // HorizontalRule,
+  // ImageBlock,
+  // ImageUpload,
+  Link,
+} from '../../extensions/'
 // import { TableOfContentsNode } from '@/extensions/TableOfContentsNode'
 
 export const isTableGripSelected = (node: HTMLElement) => {
@@ -32,13 +32,12 @@ export const isTableGripSelected = (node: HTMLElement) => {
 
 export const isCustomNodeSelected = (editor: Editor, node: HTMLElement) => {
   const customNodes = [
-    'adfa', // 模拟数据
     // HorizontalRule.name,
     // ImageBlock.name,
     // ImageUpload.name,
-    // CodeBlock.name,
+    CodeBlock.name,
     // ImageBlock.name,
-    // Link.name,
+    Link.name,
     // AiWriter.name,
     // AiImage.name,
     // Figcaption.name,

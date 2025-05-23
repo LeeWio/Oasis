@@ -9,29 +9,54 @@ export type TextMenuItemProps = {
   fontSize?: number
   onPress?: () => void
   isSelected?: boolean
-  value?: string
+  value: string | undefined
+  startContent?: React.ReactNode
+  endContent?: React.ReactNode
+  size?: 'sm' | 'md' | 'lg'
+  tooltip?: string
+  className?: string
 }
 
 const TextMenuItem = React.forwardRef<HTMLButtonElement, TextMenuItemProps>(
-  ({ icon, value, isSelected = false, fontSize = 20, onPress }: TextMenuItemProps, ref) => {
-    return (
-      <Tooltip content={value}>
-        <Button
-          ref={ref}
-          isIconOnly
-          disableRipple
-          className={cn({
-            'bg-default': isSelected,
-          })}
-          radius="md"
-          size="sm"
-          variant="light"
-          onPress={onPress}
-        >
-          {icon ? <Icon fontSize={fontSize} icon={icon} /> : value}
-        </Button>
-      </Tooltip>
+  (
+    {
+      icon,
+      tooltip,
+      fontSize = 20,
+      size = 'sm',
+      isSelected = false,
+      onPress,
+      value,
+      startContent,
+      endContent,
+      className,
+      ...props
+    },
+    ref,
+  ) => {
+    const content = icon ? <Icon fontSize={fontSize} icon={icon} /> : value
+
+    const button = (
+      <Button
+        ref={ref}
+        isIconOnly={!!icon}
+        endContent={endContent}
+        startContent={startContent}
+        disableRipple
+        className={cn(className, {
+          'bg-default': isSelected,
+        })}
+        radius="md"
+        size={size}
+        variant="light"
+        onPress={onPress}
+        {...props}
+      >
+        {content}
+      </Button>
     )
+
+    return tooltip ? <Tooltip content={tooltip}>{button}</Tooltip> : button
   },
 )
 
