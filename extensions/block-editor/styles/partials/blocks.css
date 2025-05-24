@@ -1,6 +1,6 @@
 .ProseMirror {
   /* Image Block */
-  figure[data-type='imageBlock'] {
+  figure[data-type='image'] {
     @apply m-0;
 
     img {

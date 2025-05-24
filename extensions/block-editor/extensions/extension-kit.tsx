@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import {
   ListKit,
@@ -12,7 +12,7 @@ import {
   Dropcursor,
   Placeholder,
   BlockquoteFigure,
-  Figcaption,
+  // Figcaption,
   Link,
   Focus,
   Typography,
@@ -21,21 +21,23 @@ import {
   DetailsSummary,
   Table,
   Selection,
+  Image,
   Subscript,
   Superscript,
   TextAlign,
   CodeBlock,
   // UniqueID,
-} from '.'
+} from ".";
 
 export const ExtensionKit = () => [
   Column,
   CodeBlock,
   Typography,
   Focus,
-  Figcaption,
+  // Figcaption,
   BlockquoteFigure,
   Mathematics,
+  Image,
   ListKit.configure({
     taskItem: {
       nested: true,
@@ -56,13 +58,13 @@ export const ExtensionKit = () => [
   }),
   Superscript,
   TextAlign.configure({
-    types: ['heading', 'paragraph'],
+    types: ["heading", "paragraph"],
   }),
   TextStyleKit,
   Details.configure({
     persist: true,
     HTMLAttributes: {
-      class: 'details',
+      class: "details",
     },
   }),
   DetailsContent,
@@ -71,7 +73,7 @@ export const ExtensionKit = () => [
   Placeholder.configure({
     includeChildren: true,
     showOnlyCurrent: false,
-    placeholder: () => '',
+    placeholder: () => "",
   }),
   StarterKit.configure({
     listItem: false,
@@ -81,11 +83,11 @@ export const ExtensionKit = () => [
   }),
   Dropcursor.configure({
     width: 2,
-    class: 'ProseMirror-dropcursor border-black',
+    class: "ProseMirror-dropcursor border-black",
   }),
   Link.configure({
     openOnClick: false,
   }),
-]
+];
 
-export default ExtensionKit
+export default ExtensionKit;

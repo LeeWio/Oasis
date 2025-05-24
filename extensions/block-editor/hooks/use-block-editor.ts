@@ -1,6 +1,6 @@
-import { useEditor } from '@tiptap/react'
+import { useEditor } from "@tiptap/react";
 
-import ExtensionKit from '../extensions/extension-kit'
+import ExtensionKit from "../extensions/extension-kit";
 export const useBlockEditor = () => {
   const editor = useEditor({
     // place the cursor in the editor after initialization
@@ -12,7 +12,7 @@ export const useBlockEditor = () => {
     injectCSS: true,
 
     extensions: [...ExtensionKit()],
-  })
+  });
 
-  return { editor }
-}
+  return { editor };
+};
