@@ -9,7 +9,7 @@ import {
   // ImageUpload,
   Link,
 } from "../../extensions/";
-// import { TableOfContentsNode } from '@/extensions/TableOfContentsNode'
+import { TableOfContentsNode } from "@/extensions/block-editor/extensions/TableOfContentsNode";
 
 export const isTableGripSelected = (node: HTMLElement) => {
   let container = node;
@@ -45,7 +45,7 @@ export const isCustomNodeSelected = (editor: Editor, node: HTMLElement) => {
     // AiWriter.name,
     // AiImage.name,
     // Figcaption.name,
-    // TableOfContentsNode.name,
+    TableOfContentsNode.name,
   ];
 
   return (

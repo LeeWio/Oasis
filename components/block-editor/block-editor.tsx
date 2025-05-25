@@ -55,9 +55,6 @@ export const BlockEditor = ({ }: BlockEditorProps) => {
         hideCloseButton
         aria-label="block-editor label"
         backdrop="blur"
-        classNames={{
-          body: "scrollbar-hide min-h-dvh",
-        }}
         isOpen={isOpen}
         scrollBehavior="inside"
         size="5xl"
@@ -70,20 +67,17 @@ export const BlockEditor = ({ }: BlockEditorProps) => {
                 <Button
                   aria-label="block-editor button"
                   onPress={() =>
-                    editor
-                      .chain()
-                      .focus()
-                      .setImage({
-                        src: "https://images.unsplash.com/photo-1742241461508-07dfb49187c1?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDF8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8",
-                      })
-                      .run()
+                    editor.chain().focus().insertTableOfContents().run()
                   }
                 >
-                  set image
+                  insert table-of-contents
                 </Button>
               </ModalHeader>
               <ModalBody>
-                <EditorContent editor={editor} />
+                <EditorContent
+                  editor={editor}
+                  className="scrollbar-hide overflow-y-auto min-h-dvh"
+                />
                 <ColumnsMenu editor={editor} />
                 <TextMenu editor={editor} />
                 <ContentItemMenu

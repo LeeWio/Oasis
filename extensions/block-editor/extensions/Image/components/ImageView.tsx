@@ -1,9 +1,9 @@
 import { Image } from "@heroui/image";
 import { cn } from "@heroui/theme";
-import { NodeViewProps, NodeViewWrapper } from "@tiptap/react";
+import { NodeViewRendererProps, NodeViewWrapper } from "@tiptap/react";
 import { useCallback, useRef } from "react";
 
-export const ImageBlockView = (props: NodeViewProps) => {
+export const ImageBlockView = (props: NodeViewRendererProps) => {
   const { editor, getPos, node } = props;
   const imageWrapperRef = useRef(null);
   const { src } = node.attrs;

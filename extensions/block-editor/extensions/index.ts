@@ -20,6 +20,7 @@ export { Superscript } from "@tiptap/extension-superscript";
 export { TextAlign } from "@tiptap/extension-text-align";
 export { Highlight } from "@tiptap/extension-highlight";
 export { Typography } from "@tiptap/extension-typography";
+export { TableOfContents } from "@tiptap-pro/extension-table-of-contents";
 // export { UniqueID } from '@tiptap-pro/extension-unique-id'
 
 export { Document } from "./Document";
@@ -33,3 +34,4 @@ export { BlockquoteFigure } from "./BlockquoteFigure";
 export { Quote } from "./BlockquoteFigure/Quote";
 export { QuoteCaption } from "./BlockquoteFigure/QuoteCaption";
 export { Image } from "./Image";
+export { TableOfContentsNode } from "./TableOfContentsNode";

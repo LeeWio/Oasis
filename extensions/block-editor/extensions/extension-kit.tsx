@@ -12,6 +12,7 @@ import {
   Dropcursor,
   Placeholder,
   BlockquoteFigure,
+  TableOfContents,
   // Figcaption,
   Link,
   Focus,
@@ -26,6 +27,7 @@ import {
   Superscript,
   TextAlign,
   CodeBlock,
+  TableOfContentsNode,
   // UniqueID,
 } from ".";
 
@@ -38,6 +40,8 @@ export const ExtensionKit = () => [
   BlockquoteFigure,
   Mathematics,
   Image,
+  TableOfContents,
+  TableOfContentsNode,
   ListKit.configure({
     taskItem: {
       nested: true,
