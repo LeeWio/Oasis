@@ -1,7 +1,5 @@
-"use client";
-
-import { EditorContent, useEditorState } from "@tiptap/react";
-import { useRef } from "react";
+import { EditorContent, useEditorState } from '@tiptap/react'
+import { useRef } from 'react'
 import {
   ModalHeader,
   ModalBody,
@@ -9,25 +7,25 @@ import {
   Modal,
   ModalContent,
   useDisclosure,
-} from "@heroui/modal";
-import "@/extensions/block-editor/styles/index.css";
-import "katex/dist/katex.min.css";
-import { Button } from "@heroui/button";
-import { CircularProgress } from "@heroui/progress";
+} from '@heroui/modal'
+import '@/extensions/block-editor/styles/index.css'
+import 'katex/dist/katex.min.css'
+import { Button } from '@heroui/button'
+import { CircularProgress } from '@heroui/progress'
 
-import { useBlockEditor } from "@/extensions/block-editor/hooks/use-block-editor";
-import { ColumnsMenu } from "@/extensions/block-editor/extensions/MultiColumn/menus";
-import { ContentItemMenu } from "@/extensions/block-editor/menus/ContentItemMenu";
-import { TextMenu } from "@/extensions/block-editor/menus/TextMenu";
-import { LinkMenu } from "@/extensions/block-editor/menus/LinkMenu";
-import { ImageMenu } from "@/extensions/block-editor/extensions/Image/components/ImageMenu";
+import { useBlockEditor } from '@/extensions/block-editor/hooks/use-block-editor'
+import { ColumnsMenu } from '@/extensions/block-editor/extensions/MultiColumn/menus'
+import { ContentItemMenu } from '@/extensions/block-editor/menus/ContentItemMenu'
+import { TextMenu } from '@/extensions/block-editor/menus/TextMenu'
+import { LinkMenu } from '@/extensions/block-editor/menus/LinkMenu'
+import { ImageMenu } from '@/extensions/block-editor/extensions/Image/components/ImageMenu'
 
-type BlockEditorProps = {};
-export const BlockEditor = ({ }: BlockEditorProps) => {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const menuContainerRef = useRef<HTMLDivElement>(null);
+type BlockEditorProps = {}
+export const BlockEditor = ({}: BlockEditorProps) => {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure()
+  const menuContainerRef = useRef<HTMLDivElement>(null)
 
-  const { editor } = useBlockEditor();
+  const { editor } = useBlockEditor()
 
   const { characters, words } = useEditorState({
     editor,
@@ -35,14 +33,14 @@ export const BlockEditor = ({ }: BlockEditorProps) => {
       const { characters, words } = ctx.editor?.storage.characterCount || {
         characters: () => 0,
         words: () => 0,
-      };
+      }
 
-      return { characters: characters(), words: words() };
+      return { characters: characters(), words: words() }
     },
-  });
+  })
 
   if (!editor) {
-    return null;
+    return null
   }
 
   return (
@@ -66,24 +64,19 @@ export const BlockEditor = ({ }: BlockEditorProps) => {
               <ModalHeader className="flex flex-col gap-1">
                 <Button
                   aria-label="block-editor button"
-                  onPress={() =>
-                    editor.chain().focus().insertTableOfContents().run()
-                  }
+                  onPress={() => editor.chain().focus().insertTableOfContents().run()}
                 >
                   insert table-of-contents
                 </Button>
               </ModalHeader>
               <ModalBody>
                 <EditorContent
+                  className="min-h-dvh overflow-y-auto scrollbar-hide"
                   editor={editor}
-                  className="scrollbar-hide overflow-y-auto min-h-dvh"
                 />
                 <ColumnsMenu editor={editor} />
                 <TextMenu editor={editor} />
-                <ContentItemMenu
-                  editor={editor}
-                  isEditable={editor.isEditable}
-                />
+                <ContentItemMenu editor={editor} isEditable={editor.isEditable} />
                 <LinkMenu editor={editor} />
                 <ImageMenu editor={editor} />
               </ModalBody>
@@ -100,5 +93,5 @@ export const BlockEditor = ({ }: BlockEditorProps) => {
         </ModalContent>
       </Modal>
     </>
-  );
-};
+  )
+}

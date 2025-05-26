@@ -1,32 +1,28 @@
-import type { CircleChartProps } from "@/components/rechart/CircleCharCard";
+import type { CircleChartProps } from '@/components/rechart/CircleCharCard'
 
-import React from "react";
-import { Card, CardBody } from "@heroui/card";
+import React from 'react'
+import { Card, CardBody } from '@heroui/card'
 
-import { CircleChartCard } from "@/components/rechart/CircleCharCard";
+import { CircleChartCard } from '@/components/rechart/CircleCharCard'
 
 const data: CircleChartProps[] = [
   {
-    title: "Activity",
-    color: "primary",
+    title: 'Activity',
+    color: 'primary',
     total: 1358,
-    chartData: [
-      { name: "Active Users", value: 780, fill: "hsl(var(--heroui-primary))" },
-    ],
+    chartData: [{ name: 'Active Users', value: 780, fill: 'hsl(var(--heroui-primary))' }],
   },
   {
-    title: "Revenue",
-    color: "default",
+    title: 'Revenue',
+    color: 'default',
     total: 2450,
-    chartData: [
-      { name: "Monthly", value: 1840, fill: "hsl(var(--heroui-primary))" },
-    ],
+    chartData: [{ name: 'Monthly', value: 1840, fill: 'hsl(var(--heroui-primary))' }],
   },
-];
+]
 
 export default function Home() {
   return (
-    <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10 ml-0">
+    <section className="ml-0 flex flex-col items-center justify-center gap-4 py-8 md:py-10">
       <div className="flex w-full flex-row justify-center space-x-6">
         <CircleChartCard {...data[0]} className="w-64" />
 
@@ -39,5 +35,5 @@ export default function Home() {
         <CircleChartCard {...data[1]} className="w-64" />
       </div>
     </section>
-  );
+  )
 }

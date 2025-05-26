@@ -38,7 +38,7 @@ export const CircleChartCard = React.forwardRef<
       <div className="flex flex-col gap-y-2 p-4 pb-0">
         <div className="flex items-center justify-between gap-x-2">
           <dt>
-            <h3 className="text-small font-medium text-default-500">{title}</h3>
+            <h3 className="font-medium text-default-500 text-small">{title}</h3>
           </dt>
           <div className="flex items-center justify-end gap-x-2">
             <Dropdown
@@ -105,7 +105,7 @@ export const CircleChartCard = React.forwardRef<
                 <tspan className="fill-default-500 text-tiny" dy="-0.5em" x="50%">
                   {chartData?.[0].name}
                 </tspan>
-                <tspan className="fill-foreground text-medium font-semibold" dy="1.5em" x="50%">
+                <tspan className="fill-foreground font-semibold text-medium" dy="1.5em" x="50%">
                   {formatTotal(total)}
                 </tspan>
               </text>
