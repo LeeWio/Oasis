@@ -1,16 +1,20 @@
-import { Link } from '@heroui/link'
-import { Divider } from '@heroui/divider'
+import { Link } from "@heroui/link";
+import { Divider } from "@heroui/divider";
 
-import { MemoButton } from '../../menus/TextMenu'
+import { MemoButton } from "../../menus/TextMenu";
 
 export type LinkPreviewPanelProps = {
-  url: string
-  onEdit: () => void
-  onClear: () => void
-}
+  url: string;
+  onEdit: () => void;
+  onClear: () => void;
+};
 
-export const LinkPreviewPanel = ({ onClear, onEdit, url }: LinkPreviewPanelProps) => {
-  const sanitizedLink = url?.startsWith('javascript:') ? '' : url
+export const LinkPreviewPanel = ({
+  onClear,
+  onEdit,
+  url,
+}: LinkPreviewPanelProps) => {
+  const sanitizedLink = url?.startsWith("javascript:") ? "" : url;
 
   return (
     <div
@@ -33,5 +37,5 @@ export const LinkPreviewPanel = ({ onClear, onEdit, url }: LinkPreviewPanelProps
       <Divider className="mx-1 h-6" orientation="vertical" />
       <MemoButton icon="lucide:trash-2" value="Trash" onPress={onClear} />
     </div>
-  )
-}
+  );
+};

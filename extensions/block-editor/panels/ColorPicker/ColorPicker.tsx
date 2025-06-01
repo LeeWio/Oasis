@@ -1,46 +1,53 @@
-import { memo, useCallback, useState } from 'react'
-import { HexColorPicker } from 'react-colorful'
-import { Input } from '@heroui/input'
+import { memo, useCallback, useState } from "react";
+import { HexColorPicker } from "react-colorful";
+import { Input } from "@heroui/input";
 
-import { themeColors } from '../../lib/constants'
-import { MemoButton } from '../../menus/TextMenu'
+import { themeColors } from "../../lib/constants";
+import { MemoButton } from "../../menus/TextMenu";
 
-import ColorButton from './ColorButton'
+import ColorButton from "./ColorButton";
 
 export type ColorPickerProps = {
-  color?: string
-  onChange?: (color: string) => void
-  onClear?: () => void
-}
+  color?: string;
+  onChange?: (color: string) => void;
+  onClear?: () => void;
+};
 
-const MemoColorButton = memo(ColorButton)
+const MemoColorButton = memo(ColorButton);
 
 export const ColorPicker = ({ color, onChange, onClear }: ColorPickerProps) => {
-  const [colorInputValue, setColorInputValue] = useState(color || '')
+  const [colorInputValue, setColorInputValue] = useState(color || "");
 
-  const handleColorUpdate = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    setColorInputValue(event.target.value)
-  }, [])
+  const handleColorUpdate = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setColorInputValue(event.target.value);
+    },
+    [],
+  );
 
   const handleColorChange = useCallback(() => {
-    const isCorrectColor = /^#([0-9A-F]{3}){1,2}$/i.test(colorInputValue)
+    const isCorrectColor = /^#([0-9A-F]{3}){1,2}$/i.test(colorInputValue);
 
     if (!isCorrectColor) {
       if (onChange) {
-        onChange('')
+        onChange("");
       }
 
-      return
+      return;
     }
 
     if (onChange) {
-      onChange(colorInputValue)
+      onChange(colorInputValue);
     }
-  }, [colorInputValue, onChange])
+  }, [colorInputValue, onChange]);
 
   return (
     <div className="my-2 flex max-w-48 flex-col gap-2">
-      <HexColorPicker className="!w-full" color={color || ''} onChange={onChange} />
+      <HexColorPicker
+        className="!w-full"
+        color={color || ""}
+        onChange={onChange}
+      />
       <Input
         size="sm"
         type="text"
@@ -70,5 +77,5 @@ export const ColorPicker = ({ color, onChange, onClear }: ColorPickerProps) => {
         />
       </div>
     </div>
-  )
-}
+  );
+};

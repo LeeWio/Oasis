@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import {
   Navbar as HeroUINavbar,
@@ -8,32 +8,38 @@ import {
   NavbarBrand,
   NavbarItem,
   NavbarMenuItem,
-} from '@heroui/navbar'
-import { Kbd } from '@heroui/kbd'
-import { Link } from '@heroui/link'
-import { Input } from '@heroui/input'
-import { link as linkStyles } from '@heroui/theme'
-import NextLink from 'next/link'
-import clsx from 'clsx'
-import { ToastProvider } from '@heroui/toast'
+} from "@heroui/navbar";
+import { Kbd } from "@heroui/kbd";
+import { Link } from "@heroui/link";
+import { Input } from "@heroui/input";
+import { link as linkStyles } from "@heroui/theme";
+import NextLink from "next/link";
+import clsx from "clsx";
+import { ToastProvider } from "@heroui/toast";
 
-import { Auth } from './navbar/Auth'
+import { AuthForm } from "./AuthForm/AuthForm";
 
-import { siteConfig } from '@/config/site'
-import { ThemeSwitch } from '@/components/theme-switch'
-import { TwitterIcon, GithubIcon, DiscordIcon, SearchIcon, Logo } from '@/components/icons'
-import { useToast } from '@/hooks/useToast'
+import { siteConfig } from "@/config/site";
+import { ThemeSwitch } from "@/components/theme-switch";
+import {
+  TwitterIcon,
+  GithubIcon,
+  DiscordIcon,
+  SearchIcon,
+  Logo,
+} from "@/components/icons";
+import { useToast } from "@/hooks/useToast";
 
 export const Navbar = () => {
   const searchInput = (
     <Input
       aria-label="Search"
       classNames={{
-        inputWrapper: 'bg-default-100',
-        input: 'text-sm',
+        inputWrapper: "bg-default-100",
+        input: "text-sm",
       }}
       endContent={
-        <Kbd className="hidden lg:inline-block" keys={['command']}>
+        <Kbd className="hidden lg:inline-block" keys={["command"]}>
           K
         </Kbd>
       }
@@ -44,9 +50,9 @@ export const Navbar = () => {
       }
       type="search"
     />
-  )
+  );
 
-  const toast = useToast()
+  const toast = useToast();
 
   return (
     <>
@@ -54,18 +60,21 @@ export const Navbar = () => {
       <HeroUINavbar maxWidth="full" position="sticky">
         <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
           <NavbarBrand as="li" className="max-w-fit gap-3">
-            <NextLink className="flex items-center justify-start gap-1" href="/">
+            <NextLink
+              className="flex items-center justify-start gap-1"
+              href="/"
+            >
               <Logo />
               <p className="font-bold text-inherit">ACME</p>
             </NextLink>
           </NavbarBrand>
           <ul className="ml-2 hidden justify-start gap-4 lg:flex">
-            {siteConfig.navItems.map(item => (
+            {siteConfig.navItems.map((item) => (
               <NavbarItem key={item.href}>
                 <NextLink
                   className={clsx(
-                    linkStyles({ color: 'foreground' }),
-                    'data-[active=true]:font-medium data-[active=true]:text-primary',
+                    linkStyles({ color: "foreground" }),
+                    "data-[active=true]:font-medium data-[active=true]:text-primary",
                   )}
                   color="foreground"
                   href={item.href}
@@ -77,12 +86,23 @@ export const Navbar = () => {
           </ul>
         </NavbarContent>
 
-        <NavbarContent className="hidden basis-1/5 sm:flex sm:basis-full" justify="end">
+        <NavbarContent
+          className="hidden basis-1/5 sm:flex sm:basis-full"
+          justify="end"
+        >
           <NavbarItem className="hidden gap-2 sm:flex">
-            <Link isExternal aria-label="Twitter" href={siteConfig.links.twitter}>
+            <Link
+              isExternal
+              aria-label="Twitter"
+              href={siteConfig.links.twitter}
+            >
               <TwitterIcon className="text-default-500" />
             </Link>
-            <Link isExternal aria-label="Discord" href={siteConfig.links.discord}>
+            <Link
+              isExternal
+              aria-label="Discord"
+              href={siteConfig.links.discord}
+            >
               <DiscordIcon className="text-default-500" />
             </Link>
             <Link isExternal aria-label="Github" href={siteConfig.links.github}>
@@ -92,7 +112,7 @@ export const Navbar = () => {
           </NavbarItem>
           <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
           <NavbarItem className="hidden md:flex">
-            <Auth />
+            <AuthForm />
           </NavbarItem>
         </NavbarContent>
 
@@ -112,10 +132,10 @@ export const Navbar = () => {
                 <Link
                   color={
                     index === 2
-                      ? 'primary'
+                      ? "primary"
                       : index === siteConfig.navMenuItems.length - 1
-                        ? 'danger'
-                        : 'foreground'
+                        ? "danger"
+                        : "foreground"
                   }
                   href="#"
                   size="lg"
@@ -128,5 +148,5 @@ export const Navbar = () => {
         </NavbarMenu>
       </HeroUINavbar>
     </>
-  )
-}
+  );
+};

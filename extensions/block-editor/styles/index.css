@@ -1,11 +1,11 @@
-@import './partials/animations.css';
-@import './partials/blocks.css';
-@import './partials/code.css';
-@import './partials/collab.css';
-@import './partials/lists.css';
-@import './partials/placeholder.css';
-@import './partials/table.css';
-@import './partials/typography.css';
+@import "./partials/animations.css";
+@import "./partials/blocks.css";
+@import "./partials/code.css";
+@import "./partials/collab.css";
+@import "./partials/lists.css";
+@import "./partials/placeholder.css";
+@import "./partials/table.css";
+@import "./partials/typography.css";
 
 .ProseMirror {
   @apply z-0 mx-auto caret-black outline-0 dark:caret-white;
@@ -40,6 +40,6 @@
   outline: none;
 }
 
-[data-theme='slash-command'] {
+[data-theme="slash-command"] {
   width: 1000vw;
 }

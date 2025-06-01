@@ -1,7 +1,14 @@
-'use client'
+"use client";
 
-import { Input } from '@heroui/input'
-
+import { BlockEditor } from "@/components/BlockEditor";
+import { Button } from "@heroui/button";
+import { useDisclosure } from "@heroui/modal";
 export default function AboutPage() {
-  return <Input />
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  return (
+    <>
+      <Button onPress={onOpen}>open block-editor</Button>
+      <BlockEditor isOpen={isOpen} onOpenChange={onOpenChange} />
+    </>
+  );
 }

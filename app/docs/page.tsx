@@ -1,7 +1,7 @@
-import { Button } from '@heroui/button'
-import { PopoverContent, Popover, PopoverTrigger } from '@heroui/popover'
+import { Button } from "@heroui/button";
+import { PopoverContent, Popover, PopoverTrigger } from "@heroui/popover";
 
-import { title } from '@/components/primitives'
+import { title } from "@/components/primitives";
 export default function DocsPage() {
   return (
     <div>
@@ -24,5 +24,5 @@ export default function DocsPage() {
       </Popover>
       <h1 className={title()}>Docs</h1>
     </div>
-  )
+  );
 }

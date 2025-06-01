@@ -1,8 +1,8 @@
-import { Node, NodeViewRendererProps } from '@tiptap/core'
-import { NodeViewWrapper, ReactNodeViewRenderer } from '@tiptap/react'
+import { Node, NodeViewRendererProps } from "@tiptap/core";
+import { NodeViewWrapper, ReactNodeViewRenderer } from "@tiptap/react";
 
 const TableOfNodeContent = (props: NodeViewRendererProps) => {
-  const { editor } = props
+  const { editor } = props;
 
   return (
     <NodeViewWrapper>
@@ -10,20 +10,20 @@ const TableOfNodeContent = (props: NodeViewRendererProps) => {
         aaa
       </div>
     </NodeViewWrapper>
-  )
-}
+  );
+};
 
-declare module '@tiptap/core' {
+declare module "@tiptap/core" {
   interface Commands<ReturnType> {
     tableOfContentsNode: {
-      insertTableOfContents: () => ReturnType
-    }
+      insertTableOfContents: () => ReturnType;
+    };
   }
 }
 
 export const TableOfContentsNode = Node.create({
-  name: 'tableOfContentsNode',
-  group: 'block',
+  name: "tableOfContentsNode",
+  group: "block",
   atom: true,
   selectable: true,
   draggable: true,
@@ -34,15 +34,15 @@ export const TableOfContentsNode = Node.create({
       {
         tag: 'div[data-type="table-of-content"]',
       },
-    ]
+    ];
   },
 
   renderHTML({ HTMLAttributes }) {
-    return ['div', { ...HTMLAttributes, 'data-type': 'table-of-content' }]
+    return ["div", { ...HTMLAttributes, "data-type": "table-of-content" }];
   },
 
   addNodeView() {
-    return ReactNodeViewRenderer(TableOfNodeContent)
+    return ReactNodeViewRenderer(TableOfNodeContent);
   },
 
   addCommands() {
@@ -52,8 +52,8 @@ export const TableOfContentsNode = Node.create({
         ({ commands }) => {
           return commands.insertContent({
             type: this.name,
-          })
+          });
         },
-    }
+    };
   },
-})
+});
