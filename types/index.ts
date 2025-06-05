@@ -15,6 +15,12 @@ export type ResultResponse<T = unknown> = {
   message: string; // A message describing the result, such as 'Success' or error details
 };
 
+export enum FileTypeEnum {
+  AVATAR = "AVATAR",
+  DOCUMENT = "DOCUMENT",
+  IMAGE = "IMAGE",
+}
+
 export type ToastProviderProps = {
   placement?:
     | "bottom-right"

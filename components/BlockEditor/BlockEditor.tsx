@@ -1,5 +1,5 @@
 import { EditorContent, useEditorState } from "@tiptap/react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import {
   ModalHeader,
   ModalBody,
@@ -17,16 +17,24 @@ import { TextMenu } from "@/extensions/block-editor/menus/TextMenu";
 import { LinkMenu } from "@/extensions/block-editor/menus/LinkMenu";
 import { ImageMenu } from "@/extensions/block-editor/extensions/Image/components/ImageMenu";
 import { EditorFooter } from "./EditroFooter";
+import { Button } from "@heroui/button";
+import { Icon } from "@iconify/react";
+import { cn } from "@heroui/theme";
 
 type BlockEditorProps = {
-  isOpen: boolean;
-  onOpenChange: () => void;
+  isModalOpen: boolean;
+  onModalOpenChange: () => void;
 };
 
-export const BlockEditor = ({ isOpen, onOpenChange }: BlockEditorProps) => {
+export const BlockEditor = ({
+  isModalOpen,
+  onModalOpenChange,
+}: BlockEditorProps) => {
   const menuContainerRef = useRef<HTMLDivElement>(null);
 
   const { editor } = useBlockEditor();
+
+  const [isOpen, setIsOpen] = useState(false);
 
   // BUG: 正常应该直接解构，等待 tiptap 修改该 bug
   const state = useEditorState({
@@ -54,21 +62,39 @@ export const BlockEditor = ({ isOpen, onOpenChange }: BlockEditorProps) => {
         hideCloseButton
         aria-label="block-editor label"
         backdrop="blur"
-        isOpen={isOpen}
+        isOpen={isModalOpen}
         tabIndex={-1}
         scrollBehavior="inside"
+        radius="sm"
         size="5xl"
-        onOpenChange={onOpenChange}
+        onOpenChange={onModalOpenChange}
         classNames={{
-          body: "scrollbar-hide",
-          footer: "flex justify-between text-neutral-500 dark:text-neutral-400",
+          body: "scrollbar-hide py-0",
+          footer: cn(
+            "absolute w-full bottom-0 h-14 overflow-visible rounded-lg bg-content1 duration-300 ease-in-out transition-height",
+            {
+              "h-full": isOpen,
+            },
+          ),
         }}
       >
         <ModalContent>
           {() => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                Modal Title
+                <Button
+                  isIconOnly={isOpen}
+                  size="sm"
+                  className="absolute right-2 top-2 z-10 opacity-0"
+                  radius="full"
+                  onPress={() => setIsOpen((pre) => !pre)}
+                >
+                  {isOpen ? (
+                    <Icon fontSize={20} icon={"ci:close-sm"} />
+                  ) : (
+                    "Apply"
+                  )}
+                </Button>
               </ModalHeader>
               <ModalBody>
                 <EditorContent
@@ -85,7 +111,11 @@ export const BlockEditor = ({ isOpen, onOpenChange }: BlockEditorProps) => {
                 <ImageMenu editor={editor} />
               </ModalBody>
               <ModalFooter>
-                <EditorFooter words={words} characters={characters} />
+                <EditorFooter
+                  characters={characters}
+                  words={words}
+                  isOpen={isOpen}
+                />
               </ModalFooter>
             </>
           )}

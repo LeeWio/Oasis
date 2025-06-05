@@ -8,7 +8,7 @@ export default function AboutPage() {
   return (
     <>
       <Button onPress={onOpen}>open block-editor</Button>
-      <BlockEditor isOpen={isOpen} onOpenChange={onOpenChange} />
+      <BlockEditor isModalOpen={isOpen} onModalOpenChange={onOpenChange} />
     </>
   );
 }
