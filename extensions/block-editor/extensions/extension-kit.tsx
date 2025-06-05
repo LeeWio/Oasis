@@ -18,6 +18,7 @@ import {
   Focus,
   Typography,
   DetailsContent,
+  ImageUpload,
   Mathematics,
   DetailsSummary,
   Table,
@@ -33,6 +34,7 @@ import {
 
 export const ExtensionKit = () => [
   Column,
+  ImageUpload,
   CodeBlock,
   Typography,
   Focus,

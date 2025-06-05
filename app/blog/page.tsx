@@ -14,7 +14,7 @@ export default function BlogPage() {
   const dispatch = useAppDispatch();
 
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap gap-2 ml-auto mr-0">
       {[
         ["Solid", "solid"],
         ["Bordered", "bordered"],

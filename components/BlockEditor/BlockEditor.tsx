@@ -95,6 +95,13 @@ export const BlockEditor = ({
                     "Apply"
                   )}
                 </Button>
+                <Button
+                  onPress={() => {
+                    editor.chain().focus().setImageUpload().run();
+                  }}
+                >
+                  upload image
+                </Button>
               </ModalHeader>
               <ModalBody>
                 <EditorContent

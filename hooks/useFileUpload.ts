@@ -1,11 +1,4 @@
-import {
-  ChangeEvent,
-  DragEvent,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { DragEvent, useCallback, useEffect, useRef, useState } from "react";
 import { useUploadFilesMutation } from "@/feature/api/fileApi";
 import { addToast } from "@heroui/toast";
 
@@ -21,7 +14,6 @@ export const useUploader = ({
       try {
         const result = await uploadImages({ files }).unwrap();
         const urls = result.map((item) => item.fileUrl);
-
         onUpload(urls);
       } catch (errPayload: any) {
         const error =
@@ -42,25 +34,14 @@ export const useUploader = ({
 export const useFileUpload = () => {
   // const fileInput = useRef<HTMLInputElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const { uploadFiles } = useUploader({ onUpload: () => {} });
 
   const handleUploadClick = useCallback(() => {
     if (inputRef.current) {
       inputRef.current.click();
     }
   }, []);
-  // const handleUploadClick = useCallback(() => {
-  //   fileInput.current?.click();
-  // }, []);
 
-  const onFileChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      e.target.files && uploadFiles(Array.from(e.target.files));
-    },
-    [uploadFiles],
-  );
-
-  return { ref: inputRef, onFileChange, handleUploadClick };
+  return { ref: inputRef, handleUploadClick };
 };
 
 export const useDropZone = ({

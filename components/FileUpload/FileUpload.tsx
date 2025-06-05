@@ -1,9 +1,9 @@
 import { useDropZone, useFileUpload, useUploader } from "@/hooks/useFileUpload";
-import { ChangeEvent, useCallback } from "react";
 import { Spinner } from "@heroui/spinner";
 import { Card, CardBody } from "@heroui/card";
 import { cn } from "@heroui/theme";
 import { Icon } from "@iconify/react";
+import { useCallback, ChangeEvent } from "react";
 
 type FileUploadProps = {
   onUpload: (url: string[]) => void;
@@ -11,7 +11,15 @@ type FileUploadProps = {
 
 export const FileUpload = ({ onUpload }: FileUploadProps) => {
   const { isLoading, uploadFiles } = useUploader({ onUpload });
-  const { handleUploadClick, ref, onFileChange } = useFileUpload();
+  const { handleUploadClick, ref } = useFileUpload();
+
+  const onFileChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      e.target.files && uploadFiles(Array.from(e.target.files));
+    },
+    [uploadFiles],
+  );
+
   const { draggedInside, onDrop, onDragEnter, onDragLeave } = useDropZone({
     uploader: uploadFiles,
   });
@@ -30,7 +38,7 @@ export const FileUpload = ({ onUpload }: FileUploadProps) => {
       onDragOver={onDragEnter}
       onDragLeave={onDragLeave}
       classNames={{
-        base: cn(!draggedInside && "bg-transparent", "w-full"),
+        base: cn(!draggedInside && "shadow-none", "w-full"),
       }}
       contentEditable={false}
       onPress={handleUploadClick}

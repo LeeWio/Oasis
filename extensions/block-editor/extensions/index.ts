@@ -29,6 +29,7 @@ export { Table } from "./Table";
 export { CodeBlock } from "./CodeBlock";
 export { Link } from "./Link";
 export { Figure } from "./Figure";
+export { ImageUpload } from "./ImageUpload";
 // export { Figcaption } from "./Figcaption";
 export { BlockquoteFigure } from "./BlockquoteFigure";
 export { Quote } from "./BlockquoteFigure/Quote";
