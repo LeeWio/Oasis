@@ -7,6 +7,8 @@ import toastReducer from "@/feature/util/toastSlice";
 import authReducer from "@/feature/auth/authSlice";
 import { authApi } from "@/feature/api/authApi";
 import { fileApi } from "@/feature/api/fileApi";
+import { TagApi } from "@/feature/api/tag-api";
+import { CategoryApi } from "@/feature/api/category-api";
 
 const createNoopStorage = () => {
   return {
@@ -37,7 +39,12 @@ const persistConfig = {
 };
 
 // Adding middleware (logger in this case) to monitor actions in the Redux state
-const middleware = [authApi.middleware, fileApi.middleware];
+const middleware = [
+  authApi.middleware,
+  fileApi.middleware,
+  TagApi.middleware,
+  CategoryApi.middleware,
+];
 
 // Combine all reducers, combining different slices of state into one main rootReducer
 const rootReducer = combineReducers({
@@ -45,6 +52,8 @@ const rootReducer = combineReducers({
   auth: authReducer,
   [authApi.reducerPath]: authApi.reducer,
   [fileApi.reducerPath]: fileApi.reducer,
+  [TagApi.reducerPath]: TagApi.reducer,
+  [CategoryApi.reducerPath]: CategoryApi.reducer,
 });
 
 // Apply the persistReducer function to enable persistence for the root reducer

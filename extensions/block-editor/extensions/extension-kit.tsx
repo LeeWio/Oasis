@@ -82,6 +82,9 @@ export const ExtensionKit = () => [
     placeholder: () => "",
   }),
   StarterKit.configure({
+    codeBlock: false,
+    listKeymap: false,
+    dropcursor: false,
     listItem: false,
     orderedList: false,
     bulletList: false,
@@ -93,6 +96,7 @@ export const ExtensionKit = () => [
   }),
   Link.configure({
     openOnClick: false,
+    HTMLAttributes: {},
   }),
 ];
 

@@ -4,6 +4,7 @@ import { Button } from "@heroui/button";
 import { Icon } from "@iconify/react";
 import { Tabs, Tab } from "@heroui/tabs";
 import { CardBody, Card } from "@heroui/card";
+import { FileUpload } from "../FileUpload";
 
 export type EditorFooterProps = {
   characters: number;
@@ -26,8 +27,10 @@ export const EditorFooter = memo(
   ({ isOpen, characters, words }: EditorFooterProps) => {
     return isOpen ? (
       <div className="flex flex-col gap-2 w-full">
-        <div className="flex flex-row justify-between gap-2">
-          <div className="flex-1 bg-red-400">1</div>
+        <div className="flex flex-row justify-between items-center gap-2">
+          <div className="flex-1 ">
+            <FileUpload onUpload={() => {}} />
+          </div>
 
           <div className="flex w-full flex-col flex-1">
             <Tabs fullWidth aria-label="Options" size="sm" radius="sm">

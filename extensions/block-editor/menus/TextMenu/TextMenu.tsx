@@ -95,7 +95,7 @@ export const TextMenu = ({ editor }: MenuProps) => {
           </MemoPopoverWrapperPicker>
 
           <MemoPopoverWrapperPicker
-            className="max-w-48 py-2"
+            className="max-w-56 py-2"
             icon="lucide:palette"
           >
             <MemoColorPicker
@@ -106,7 +106,7 @@ export const TextMenu = ({ editor }: MenuProps) => {
           </MemoPopoverWrapperPicker>
 
           <MemoPopoverWrapperPicker
-            className="max-w-48 py-2"
+            className="max-w-56 py-2"
             icon="fa6-solid:highlighter"
           >
             <MemoColorPicker

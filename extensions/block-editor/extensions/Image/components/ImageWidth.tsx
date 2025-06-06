@@ -15,13 +15,15 @@ export const ImageWidth = memo(({ onChange, value }: ImageWidthProps) => {
   );
 
   return (
-    <div className="w-14">
+    <div className="w-24">
       <Slider
         aria-label="Temperature"
         className="max-w-md"
+        radius="md"
         defaultValue={20}
         maxValue={100}
         minValue={20}
+        step={20}
         size="sm"
         value={value}
         onChange={handleChange}

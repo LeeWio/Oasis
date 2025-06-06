@@ -32,7 +32,7 @@ const PopoverFilterWrapper = React.forwardRef<
       onOpenChange={onOpenChange}
       {...props}
       classNames={{
-        content: cn("flex flex-col gap-2 w-40 items-start", className),
+        content: cn("flex flex-col gap-2 items-start", className),
       }}
       radius="md"
     >
