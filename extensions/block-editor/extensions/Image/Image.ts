@@ -1,7 +1,7 @@
 import { mergeAttributes, Range, ReactNodeViewRenderer } from "@tiptap/react";
 import { Image as TiptapImage } from "@tiptap/extension-image";
 
-import ImageView from "./components/ImageView";
+import ImageView from "./components/image-view";
 
 declare module "@tiptap/react" {
   interface Commands<ReturnType> {

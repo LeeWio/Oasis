@@ -23,20 +23,20 @@ export enum FileTypeEnum {
 
 export type ToastProviderProps = {
   placement?:
-    | "bottom-right"
-    | "bottom-left"
-    | "bottom-center"
-    | "top-right"
-    | "top-left"
-    | "top-center";
+  | "bottom-right"
+  | "bottom-left"
+  | "bottom-center"
+  | "top-right"
+  | "top-left"
+  | "top-center";
   maxVisibleToasts?: number;
   color?:
-    | "default"
-    | "primary"
-    | "secondary"
-    | "success"
-    | "warning"
-    | "danger";
+  | "default"
+  | "primary"
+  | "secondary"
+  | "success"
+  | "warning"
+  | "danger";
   radius?: "none" | "sm" | "md" | "lg" | "full";
   toastOffset?: number;
   title?: ReactNode;
@@ -51,10 +51,10 @@ export type ToastProviderProps = {
   hideCloseButton?: boolean;
   shouldShowTimeoutProgress?: boolean;
   severity?:
-    | "default"
-    | "primary"
-    | "secondary"
-    | "success"
-    | "warning"
-    | "danger";
+  | "default"
+  | "primary"
+  | "secondary"
+  | "success"
+  | "warning"
+  | "danger";
 };

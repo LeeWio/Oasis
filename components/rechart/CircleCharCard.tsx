@@ -1,51 +1,51 @@
-"use client";
+'use client'
 
-import React from "react";
+import React from 'react'
 import {
   ResponsiveContainer,
   RadialBarChart,
   RadialBar,
   Cell,
   PolarAngleAxis,
-} from "recharts";
-import { Button, ButtonProps } from "@heroui/button";
-import { cn } from "@heroui/theme";
-import { Card, CardProps } from "@heroui/card";
+} from 'recharts'
+import { Button, ButtonProps } from '@heroui/button'
+import { cn } from '@heroui/theme'
+import { Card, CardProps } from '@heroui/card'
 import {
   Dropdown,
   DropdownItem,
   DropdownTrigger,
   DropdownMenu,
-} from "@heroui/dropdown";
-import { Icon } from "@iconify/react";
+} from '@heroui/dropdown'
+import { Icon } from '@iconify/react'
 
 type ChartData = {
-  name: string;
-  value: number;
-  [key: string]: string | number;
-};
+  name: string
+  value: number
+  [key: string]: string | number
+}
 
 export type CircleChartProps = {
-  title: string;
-  color: ButtonProps["color"];
-  chartData: ChartData[];
-  total: number;
-};
+  title: string
+  color: ButtonProps['color']
+  chartData: ChartData[]
+  total: number
+}
 
 const formatTotal = (value: number | undefined) => {
-  return value?.toLocaleString() ?? "0";
-};
+  return value?.toLocaleString() ?? '0'
+}
 
 export const CircleChartCard = React.forwardRef<
   HTMLDivElement,
-  Omit<CardProps, "children"> & CircleChartProps
+  Omit<CardProps, 'children'> & CircleChartProps
 >(({ className, title, color, chartData, total, ...props }, ref) => {
   return (
     <Card
       ref={ref}
       className={cn(
-        "h-[260px] border border-transparent dark:border-default-100",
-        className,
+        'h-[260px] border border-transparent dark:border-default-100',
+        className
       )}
       {...props}
     >
@@ -57,7 +57,7 @@ export const CircleChartCard = React.forwardRef<
           <div className="flex items-center justify-end gap-x-2">
             <Dropdown
               classNames={{
-                content: "min-w-[120px]",
+                content: 'min-w-[120px]',
               }}
               placement="bottom-end"
             >
@@ -68,7 +68,7 @@ export const CircleChartCard = React.forwardRef<
               </DropdownTrigger>
               <DropdownMenu
                 itemClasses={{
-                  title: "text-tiny",
+                  title: 'text-tiny',
                 }}
                 variant="flat"
               >
@@ -107,7 +107,7 @@ export const CircleChartCard = React.forwardRef<
               animationDuration={1000}
               animationEasing="ease"
               background={{
-                fill: "hsl(var(--heroui-default-100))",
+                fill: 'hsl(var(--heroui-default-100))',
               }}
               cornerRadius={12}
               dataKey="value"
@@ -115,7 +115,7 @@ export const CircleChartCard = React.forwardRef<
               {chartData.map((_, index) => (
                 <Cell
                   key={`cell-${index}`}
-                  fill={`hsl(var(--heroui-${color === "default" ? "foreground" : color}))`}
+                  fill={`hsl(var(--heroui-${color === 'default' ? 'foreground' : color}))`}
                 />
               ))}
             </RadialBar>
@@ -141,7 +141,7 @@ export const CircleChartCard = React.forwardRef<
         </ResponsiveContainer>
       </div>
     </Card>
-  );
-});
+  )
+})
 
-CircleChartCard.displayName = "CircleChartCard";
+CircleChartCard.displayName = 'CircleChartCard'

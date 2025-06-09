@@ -23,16 +23,16 @@ export { Typography } from "@tiptap/extension-typography";
 export { TableOfContents } from "@tiptap-pro/extension-table-of-contents";
 // export { UniqueID } from '@tiptap-pro/extension-unique-id'
 
-export { Document } from "./Document";
-export { Columns, Column } from "./MultiColumn";
-export { Table } from "./Table";
-export { CodeBlock } from "./CodeBlock";
-export { Link } from "./Link";
-export { Figure } from "./Figure";
-export { ImageUpload } from "./ImageUpload";
+export { Document } from "./document";
+export { Columns, Column } from "./multi-column";
+export { Table } from "./table";
+export { CodeBlock } from "./code-block";
+export { Link } from "./link";
+export { Figure } from "./figure";
+export { ImageUpload } from "./image-upload";
 // export { Figcaption } from "./Figcaption";
-export { BlockquoteFigure } from "./BlockquoteFigure";
-export { Quote } from "./BlockquoteFigure/Quote";
-export { QuoteCaption } from "./BlockquoteFigure/QuoteCaption";
-export { Image } from "./Image";
-export { TableOfContentsNode } from "./TableOfContentsNode";
+export { BlockquoteFigure } from "./blockquote-figure";
+export { Quote } from "./blockquote-figure/quote";
+export { QuoteCaption } from "./blockquote-figure/quote-caption";
+export { Image } from "./image";
+export { TableOfContentsNode } from "./table-of-contents-node";

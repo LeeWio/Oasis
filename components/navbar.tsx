@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 import {
   Navbar as HeroUINavbar,
@@ -8,38 +8,38 @@ import {
   NavbarBrand,
   NavbarItem,
   NavbarMenuItem,
-} from "@heroui/navbar";
-import { Kbd } from "@heroui/kbd";
-import { Link } from "@heroui/link";
-import { Input } from "@heroui/input";
-import { link as linkStyles } from "@heroui/theme";
-import NextLink from "next/link";
-import clsx from "clsx";
-import { ToastProvider } from "@heroui/toast";
+} from '@heroui/navbar'
+import { Kbd } from '@heroui/kbd'
+import { Link } from '@heroui/link'
+import { Input } from '@heroui/input'
+import { link as linkStyles } from '@heroui/theme'
+import NextLink from 'next/link'
+import clsx from 'clsx'
+import { ToastProvider } from '@heroui/toast'
 
-import { AuthForm } from "./AuthForm/AuthForm";
+import { AuthForm } from './auth-form'
 
-import { siteConfig } from "@/config/site";
-import { ThemeSwitch } from "@/components/theme-switch";
+import { siteConfig } from '@/config/site'
+import { ThemeSwitch } from '@/components/theme-switch'
 import {
   TwitterIcon,
   GithubIcon,
   DiscordIcon,
   SearchIcon,
   Logo,
-} from "@/components/icons";
-import { useToast } from "@/hooks/useToast";
+} from '@/components/icons'
+import { useToast } from '@/hooks/use-toast'
 
 export const Navbar = () => {
   const searchInput = (
     <Input
       aria-label="Search"
       classNames={{
-        inputWrapper: "bg-default-100",
-        input: "text-sm",
+        inputWrapper: 'bg-default-100',
+        input: 'text-sm',
       }}
       endContent={
-        <Kbd className="hidden lg:inline-block" keys={["command"]}>
+        <Kbd className="hidden lg:inline-block" keys={['command']}>
           K
         </Kbd>
       }
@@ -50,9 +50,9 @@ export const Navbar = () => {
       }
       type="search"
     />
-  );
+  )
 
-  const toast = useToast();
+  const toast = useToast()
 
   return (
     <>
@@ -73,8 +73,8 @@ export const Navbar = () => {
               <NavbarItem key={item.href}>
                 <NextLink
                   className={clsx(
-                    linkStyles({ color: "foreground" }),
-                    "data-[active=true]:font-medium data-[active=true]:text-primary",
+                    linkStyles({ color: 'foreground' }),
+                    'data-[active=true]:font-medium data-[active=true]:text-primary'
                   )}
                   color="foreground"
                   href={item.href}
@@ -132,10 +132,10 @@ export const Navbar = () => {
                 <Link
                   color={
                     index === 2
-                      ? "primary"
+                      ? 'primary'
                       : index === siteConfig.navMenuItems.length - 1
-                        ? "danger"
-                        : "foreground"
+                        ? 'danger'
+                        : 'foreground'
                   }
                   href="#"
                   size="lg"
@@ -148,5 +148,5 @@ export const Navbar = () => {
         </NavbarMenu>
       </HeroUINavbar>
     </>
-  );
-};
+  )
+}

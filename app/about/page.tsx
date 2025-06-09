@@ -1,18 +1,19 @@
-"use client";
+'use client'
 
-import { BlockEditor } from "@/components/BlockEditor";
-import { FileUpload } from "@/components/FileUpload";
-import { useGetQuery } from "@/feature/api/tag-api";
-import { useGetQuery as useGetCategoryQuery } from "@/feature/api/category-api";
+import { BlockEditor } from '@/components/block-editor'
+import { FileUpload } from '@/components/file-upload'
+import { useGetQuery } from '@/feature/api/tag-api'
+import { useGetQuery as useGetCategoryQuery } from '@/feature/api/category-api'
 
-import { Button } from "@heroui/button";
-import { useDisclosure } from "@heroui/modal";
+import { Button } from '@heroui/button'
+import { useDisclosure } from '@heroui/modal'
+
 export default function AboutPage() {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const { data: tags, isLoading } = useGetQuery();
+  const { isOpen, onOpen, onOpenChange } = useDisclosure()
+  const { data: tags, isLoading } = useGetQuery()
 
   const { data: categories, isLoading: isCategoryLoading } =
-    useGetCategoryQuery();
+    useGetCategoryQuery()
 
   return (
     <div className="p-6 max-w-4xl mx-auto space-y-4">
@@ -49,5 +50,5 @@ export default function AboutPage() {
       <BlockEditor isModalOpen={isOpen} onModalOpenChange={onOpenChange} />
       <FileUpload onUpload={() => {}} />
     </div>
-  );
+  )
 }
