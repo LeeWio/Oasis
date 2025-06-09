@@ -1,20 +1,21 @@
-"use client";
+'use client'
 
-import React from "react";
-import { ButtonGroup, Button } from "@heroui/button";
+import React from 'react'
+import { ButtonGroup, Button } from '@heroui/button'
 import {
   Dropdown,
   DropdownTrigger,
   DropdownMenu,
   DropdownItem,
-} from "@heroui/dropdown";
-import { useDisclosure } from "@heroui/use-disclosure";
-import { SignIn } from "./SignIn";
-import { SignUp } from "./SignUp";
-import { useAuth } from "@/hooks/useAuth";
-import { Avatar } from "@heroui/avatar";
-import { useAppDispatch } from "@/hooks/store";
-import { removeAuthUser } from "@/feature/auth/authSlice";
+} from '@heroui/dropdown'
+import { useDisclosure } from '@heroui/use-disclosure'
+import { SignIn } from './SignIn'
+import { SignUp } from './SignUp'
+import { useAuth } from '@/hooks/useAuth'
+import { Avatar } from '@heroui/avatar'
+import { useAppDispatch } from '@/hooks/store'
+import { removeAuthUser } from '@/feature/auth/authSlice'
+import { Tooltip } from '@heroui/tooltip'
 
 export const ChevronDownIcon = () => {
   return (
@@ -30,45 +31,45 @@ export const ChevronDownIcon = () => {
         fill="currentColor"
       />
     </svg>
-  );
-};
+  )
+}
 
 export const AuthForm = () => {
   // get current user
-  const auth = useAuth();
+  const auth = useAuth()
 
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
 
   const {
     isOpen: isSignUpOpen,
     onOpen: onSignUpOpen,
     onOpenChange: onSignUpOpenChange,
-  } = useDisclosure();
+  } = useDisclosure()
 
   const {
     isOpen: isSignInOpen,
     onOpen: onSignInOpen,
     onOpenChange: onSignInOpenChange,
-  } = useDisclosure();
+  } = useDisclosure()
 
   const [selectedOption, setSelectedOption] = React.useState(
-    new Set(["SignUp"]),
-  );
+    new Set(['SignUp'])
+  )
 
   const descriptionsMap = {
-    SignUp: "Create a new account",
-    SignIn: "Log in to your account",
-  };
+    SignUp: 'Create a new account',
+    SignIn: 'Log in to your account',
+  }
 
   const labelsMap = {
-    SignUp: "Sign Up",
-    SignIn: "Sign In",
-  };
+    SignUp: 'Sign Up',
+    SignIn: 'Sign In',
+  }
 
   // Convert the Set to an Array and get the first value.
   const selectedOptionValue = Array.from(selectedOption)[0] as
-    | "SignUp"
-    | "SignIn";
+    | 'SignUp'
+    | 'SignIn'
 
   return (
     <>
@@ -86,28 +87,46 @@ export const AuthForm = () => {
             <DropdownItem
               key="profile"
               className="h-14 gap-2"
-              textValue={"profile"}
+              textValue={'profile'}
             >
               <p className="font-semibold">Signed in as</p>
               <p className="font-semibold">{auth.username}</p>
             </DropdownItem>
-            <DropdownItem key="settings" textValue={"My Settings"}>
+            <DropdownItem key="settings" textValue={'My Settings'}>
               My Settings
             </DropdownItem>
-            <DropdownItem key="team_settings" textValue={"Team Settings"}>
+
+            <DropdownItem key="team_settings" textValue={'Team Settings'}>
               Team Settings
             </DropdownItem>
-            <DropdownItem key="analytics" textValue={"Analytics"}>
+            <DropdownItem key="analytics" textValue={'Analytics'}>
               Analytics
             </DropdownItem>
-            <DropdownItem key="system" textValue={"System"}>
+            <DropdownItem key="system" textValue={'System'}>
               System
             </DropdownItem>
-            <DropdownItem key="configurations" textValue={"Configurations"}>
+            <DropdownItem key="configurations" textValue={'Configurations'}>
               Configurations
             </DropdownItem>
-            <DropdownItem key="help_and_feedback" textValue={"Help & Feedback"}>
+            <DropdownItem key="help_and_feedback" textValue={'Help & Feedback'}>
               Help & Feedback
+            </DropdownItem>
+            <DropdownItem key="use_info" textValue={'User Info'}>
+              <Tooltip
+                closeDelay={0}
+                delay={0}
+                placement="left"
+                content={
+                  <div className="flex items-center space-x-2">
+                    <span className="text-sm text-gray-500">IP:</span>
+                    <span className="text-sm font-medium text-indigo-600">
+                      {auth.lastLoginIp}
+                    </span>
+                  </div>
+                }
+              >
+                User Info
+              </Tooltip>
             </DropdownItem>
             <DropdownItem
               key="logout"
@@ -122,7 +141,7 @@ export const AuthForm = () => {
         <ButtonGroup variant="flat">
           <Button
             onPress={
-              selectedOptionValue === "SignIn" ? onSignInOpen : onSignUpOpen
+              selectedOptionValue === 'SignIn' ? onSignInOpen : onSignUpOpen
             }
           >
             {labelsMap[selectedOptionValue]}
@@ -143,15 +162,15 @@ export const AuthForm = () => {
             >
               <DropdownItem
                 key="SignIn"
-                description={descriptionsMap["SignIn"]}
+                description={descriptionsMap['SignIn']}
               >
-                {labelsMap["SignIn"]}
+                {labelsMap['SignIn']}
               </DropdownItem>
               <DropdownItem
                 key="SignUp"
-                description={descriptionsMap["SignUp"]}
+                description={descriptionsMap['SignUp']}
               >
-                {labelsMap["SignUp"]}
+                {labelsMap['SignUp']}
               </DropdownItem>
             </DropdownMenu>
           </Dropdown>
@@ -170,5 +189,5 @@ export const AuthForm = () => {
         onSignInOpen={onSignInOpen}
       />
     </>
-  );
-};
+  )
+}
