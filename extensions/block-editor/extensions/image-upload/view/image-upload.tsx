@@ -1,26 +1,26 @@
-import { FileUpload } from "@/components/file-upload";
-import { NodeViewProps, NodeViewWrapper } from "@tiptap/react";
-import { useCallback } from "react";
+import { FileUpload } from '@/components/file-upload'
+import { NodeViewProps, NodeViewWrapper } from '@tiptap/react'
+import { useCallback } from 'react'
 
 export const ImageUpload = ({ getPos, editor }: NodeViewProps) => {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || ''
 
   const onUpload = useCallback(
     (url: string[]) => {
-      const pos = getPos();
-      if (typeof pos === "number" && url[0]) {
-        const fullUrl = `${apiUrl}${url[0]}`;
+      const pos = getPos()
+      if (typeof pos === 'number' && url[0]) {
+        const fullUrl = `${apiUrl}${url[0]}`
 
         editor
           .chain()
           .setImage({ src: fullUrl })
           .deleteRange({ from: pos, to: pos })
           .focus()
-          .run();
+          .run()
       }
     },
-    [getPos, editor],
-  );
+    [getPos, editor]
+  )
 
   return (
     <NodeViewWrapper>
@@ -28,7 +28,7 @@ export const ImageUpload = ({ getPos, editor }: NodeViewProps) => {
         <FileUpload onUpload={onUpload} />
       </div>
     </NodeViewWrapper>
-  );
-};
+  )
+}
 
-export default ImageUpload;
+export default ImageUpload

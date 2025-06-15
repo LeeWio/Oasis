@@ -1,18 +1,18 @@
-import { memo, useCallback } from "react";
-import { SliderValue, Slider } from "@heroui/slider";
+import { memo, useCallback } from 'react'
+import { SliderValue, Slider } from '@heroui/slider'
 
 export type ImageWidthProps = {
-  onChange: (value: number) => void;
-  value: number;
-};
+  onChange: (value: number) => void
+  value: number
+}
 
 export const ImageWidth = memo(({ onChange, value }: ImageWidthProps) => {
   const handleChange = useCallback(
     (value: SliderValue) => {
-      onChange(value as number);
+      onChange(value as number)
     },
-    [onChange],
-  );
+    [onChange]
+  )
 
   return (
     <div className="w-24">
@@ -29,7 +29,7 @@ export const ImageWidth = memo(({ onChange, value }: ImageWidthProps) => {
         onChange={handleChange}
       />
     </div>
-  );
-});
+  )
+})
 
-ImageWidth.displayName = "ImageWidth";
+ImageWidth.displayName = 'ImageWidth'

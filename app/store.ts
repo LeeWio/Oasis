@@ -5,6 +5,7 @@ import createWebStorage from 'redux-persist/lib/storage/createWebStorage'
 
 import toastReducer from '@/feature/util/toastSlice'
 import authReducer from '@/feature/auth/auth-slice'
+import articleReducer from '@/feature/article/article-slice'
 import { AuthApi } from '@/feature/api/auth-api'
 import { FileApi } from '@/feature/api/file-api'
 import { TagApi } from '@/feature/api/tag-api'
@@ -52,6 +53,7 @@ const middleware = [
 const rootReducer = combineReducers({
   toast: toastReducer,
   auth: authReducer,
+  article: articleReducer,
   [AuthApi.reducerPath]: AuthApi.reducer,
   [FileApi.reducerPath]: FileApi.reducer,
   [TagApi.reducerPath]: TagApi.reducer,

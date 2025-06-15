@@ -1,6 +1,7 @@
 'use client'
 
 import { Button } from '@heroui/button'
+import { useDragAndDrop } from 'fluid-dnd/react'
 import { PopoverContent, Popover, PopoverTrigger } from '@heroui/popover'
 
 import { title } from '@/components/primitives'

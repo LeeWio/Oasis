@@ -10,7 +10,7 @@ import {
 import '@/extensions/block-editor/styles/index.css'
 import 'katex/dist/katex.min.css'
 
-import { useBlockEditor } from '@/extensions/block-editor/hooks/use-block-editor'
+import { useBlockEditor } from '@/hooks/use-block-editor'
 import { ColumnsMenu } from '@/extensions/block-editor/extensions/multi-column/menus'
 import { ContentItemMenu } from '@/extensions/block-editor/menus/content-item-menu'
 import { TextMenu } from '@/extensions/block-editor/menus/text-menu'

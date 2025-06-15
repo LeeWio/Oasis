@@ -1,10 +1,18 @@
-import { memo } from 'react'
+import { ChangeEvent, memo, useState } from 'react'
 import { CircularProgress } from '@heroui/progress'
 import { Button } from '@heroui/button'
 import { Icon } from '@iconify/react'
-import { Tabs, Tab } from '@heroui/tabs'
-import { CardBody, Card } from '@heroui/card'
-import { FileUpload } from '../file-upload/'
+import { Select, SelectItem } from '@heroui/select'
+import { Chip } from '@heroui/chip'
+import { Avatar } from '@heroui/avatar'
+
+import {
+  CategoryPayload,
+  useGetQuery as useGetCategoriesQuery,
+} from '@/feature/api/category-api'
+import { useGetQuery as useGetTagsQuery } from '@/feature/api/tag-api'
+import { ArticlePayload } from '@/feature/api/article-api'
+import { Input } from '@heroui/input'
 
 export type EditorFooterProps = {
   characters: number
@@ -25,46 +33,106 @@ const EditorStats = ({ characters, words }: EditorFooterProps) => (
 
 export const EditorFooter = memo(
   ({ isOpen, characters, words }: EditorFooterProps) => {
-    return isOpen ? (
-      <div className="flex flex-col gap-2 w-full">
-        <div className="flex flex-row justify-between items-center gap-2">
-          <div className="flex-1 ">
-            <FileUpload onUpload={() => {}} />
-          </div>
+    const { data: categories, isLoading: isGetCategoriesQuery } =
+      useGetCategoriesQuery()
 
-          <div className="flex w-full flex-col flex-1">
-            <Tabs fullWidth aria-label="Options" size="sm" radius="sm">
-              <Tab key="photos" title="Photos">
-                <Card>
-                  <CardBody>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                  </CardBody>
-                </Card>
-              </Tab>
-              <Tab key="music" title="Music">
-                <Card>
-                  <CardBody>
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                    laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                    irure dolor in reprehenderit in voluptate velit esse cillum
-                    dolore eu fugiat nulla pariatur.
-                  </CardBody>
-                </Card>
-              </Tab>
-              <Tab key="videos" title="Videos">
-                <Card>
-                  <CardBody>
-                    Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum.
-                  </CardBody>
-                </Card>
-              </Tab>
-            </Tabs>
-          </div>
-        </div>
+    const { data: tags, isLoading: isGetTagsQuery } = useGetTagsQuery()
+
+    const [article, setArticle] = useState<ArticlePayload>({
+      Categories: [],
+      thumbnailUrl: '',
+      tags: [],
+      summary: '',
+      slug: '',
+      content: '',
+      title: '',
+    })
+
+    const [category, setCategory] = useState<CategoryPayload>()
+
+    const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+      const selectedIds = e.target.value.split(',')
+
+      const selectedCategories = selectedIds
+        .map((id) => categories?.find((c) => c.id === id))
+        .filter((category): category is CategoryPayload => !!category)
+
+      setArticle((prev) => ({
+        ...prev,
+        Categories: selectedCategories,
+      }))
+    }
+
+    const handleChange = ({
+      target: { name, value },
+    }: ChangeEvent<HTMLInputElement>) =>
+      setArticle((pre) => ({
+        ...pre,
+        [name]: value,
+      }))
+
+    return isOpen ? (
+      <div className="flex flex-col w-full">
+        <Select
+          isLoading={isGetCategoriesQuery}
+          classNames={{
+            base: 'max-w-xs',
+            trigger: 'min-h-12 py-2',
+          }}
+          size="sm"
+          onChange={handleCategoryChange}
+          label="Select a category"
+          selectionMode="multiple"
+          labelPlacement="outside"
+          items={categories}
+          renderValue={(items) => (
+            <div className="flex gap-2">
+              {items.map((item) => (
+                <Chip key={item.key} className="truncate">
+                  {item.data?.name}
+                </Chip>
+              ))}
+            </div>
+          )}
+        >
+          {(category) => (
+            <SelectItem key={category.id} textValue={category.name}>
+              <div className="flex gap-2 items-center">
+                <Avatar
+                  alt={category.name}
+                  className="flex-shrink-0"
+                  size="sm"
+                />
+                <div className="flex flex-col">
+                  <span className="text-small ">{category.name}</span>
+                  <span className="text-tiny text-default-400 ">
+                    {category.description}
+                  </span>
+                </div>
+              </div>
+            </SelectItem>
+          )}
+        </Select>
+        {tags?.map((tag, index) => <div key={index}>{tag.name}</div>)}
+
+        <Input
+          label="Title"
+          value={article.title}
+          onChange={handleChange}
+          name="title"
+        />
+        <Input
+          label="Summay"
+          value={article.summary}
+          onChange={handleChange}
+          name="summary"
+        />
+        <Input
+          label="Slug"
+          value={article.slug}
+          onChange={handleChange}
+          name="slug"
+        />
       </div>
     ) : (
       <div className="flex justify-between w-full items-center text-neutral-500 dark:text-neutral-400">

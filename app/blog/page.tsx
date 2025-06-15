@@ -18,8 +18,8 @@ export default function BlogPage() {
     <>
       {data && (
         <div>
-          {data.map((article) => (
-            <div>{article.title}</div>
+          {data.map((article, index) => (
+            <div key={index}>{article.title}</div>
           ))}
         </div>
       )}

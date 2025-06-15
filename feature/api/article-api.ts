@@ -1,22 +1,22 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { CategoryPayload } from './category-api';
-import { TagPayload } from './tag-api';
-import { RootState } from '@/app/store';
-import { ResultResponse } from '@/types';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { CategoryPayload } from './category-api'
+import { TagPayload } from './tag-api'
+import { RootState } from '@/app/store'
+import { ResultResponse } from '@/types'
 
 export type ArticlePayload = {
-  id?: string;
-  title: string;
-  content: string;
-  slug: string;
-  summary: string;
-  authorId: string;
-  createAt: string;
-  updateAt: string;
-  tags?: TagPayload[];
-  Categories?: CategoryPayload[];
-  thumbnailUrl?: string;
-};
+  id?: string
+  title: string
+  content: string
+  slug: string
+  summary: string
+  authorId?: string
+  createAt?: string
+  updateAt?: string
+  tags?: TagPayload[]
+  Categories?: CategoryPayload[]
+  thumbnailUrl?: string
+}
 
 export const ArticleApi = createApi({
   reducerPath: 'article-api',
@@ -25,13 +25,13 @@ export const ArticleApi = createApi({
     baseUrl: '/api/article',
     prepareHeaders: (headers, { getState }) => {
       const authorization = (getState() as RootState).auth.userDetail
-        ?.authorization;
+        ?.authorization
 
       if (authorization) {
-        headers.set('Authorization', `Bearer ${authorization}`);
+        headers.set('Authorization', `Bearer ${authorization}`)
       }
 
-      return headers;
+      return headers
     },
   }),
   endpoints: (build) => ({
@@ -54,14 +54,14 @@ export const ArticleApi = createApi({
             (Array.isArray(response.data) && response.data.length === 0)
           ) {
             throw new Error(
-              'Empty data, please check your input or try again later.',
-            );
+              'Empty data, please check your input or try again later.'
+            )
           }
 
-          return response.data;
+          return response.data
         }
 
-        throw new Error(response.message || 'Request failed.');
+        throw new Error(response.message || 'Request failed.')
       },
       transformErrorResponse(error) {
         switch (error.status) {
@@ -69,26 +69,26 @@ export const ArticleApi = createApi({
             return {
               message: 'Bad request: Please check your input.',
               status: 400,
-            };
+            }
           case 401:
             return {
               message: 'Unauthorized: Please log in again.',
               status: 401,
-            };
+            }
           case 500:
             return {
               message: 'Server error: Please try again later.',
               status: 500,
-            };
+            }
           default:
             return {
               message: 'Unknown error occurred.',
               status: error.status || -1,
-            };
+            }
         }
       },
     }),
   }),
-});
+})
 
-export const { useGetQuery, useLazyGetQuery } = ArticleApi;
+export const { useGetQuery, useLazyGetQuery } = ArticleApi

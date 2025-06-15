@@ -1,50 +1,50 @@
-import { mergeAttributes } from "@tiptap/core";
+import { mergeAttributes } from '@tiptap/core'
 
-import { Figure } from "../figure";
+import { Figure } from '../figure'
 
-import { Quote } from "./quote";
-import { QuoteCaption } from "./quote-caption";
+import { Quote } from './quote'
+import { QuoteCaption } from './quote-caption'
 
-declare module "@tiptap/core" {
+declare module '@tiptap/core' {
   // eslint-disable-next-line no-unused-vars
   interface Commands<ReturnType> {
     blockquoteFigure: {
-      setBlockquote: () => ReturnType;
-    };
+      setBlockquote: () => ReturnType
+    }
   }
 }
 
 export const BlockquoteFigure = Figure.extend({
-  name: "blockquoteFigure",
+  name: 'blockquoteFigure',
 
-  group: "block",
+  group: 'block',
 
-  content: "quote quoteCaption",
+  content: 'quote quoteCaption',
 
   isolating: true,
 
   addExtensions() {
-    return [Quote, QuoteCaption];
+    return [Quote, QuoteCaption]
   },
 
   renderHTML({ HTMLAttributes }) {
     return [
-      "figure",
-      mergeAttributes(HTMLAttributes, { "data-type": this.name }),
-      ["div", {}, 0],
-    ];
+      'figure',
+      mergeAttributes(HTMLAttributes, { 'data-type': this.name }),
+      ['div', {}, 0],
+    ]
   },
 
   addKeyboardShortcuts() {
     return {
       Enter: () => false,
-    };
+    }
   },
 
   addAttributes() {
     return {
       ...this.parent?.(),
-    };
+    }
   },
 
   addCommands() {
@@ -52,8 +52,8 @@ export const BlockquoteFigure = Figure.extend({
       setBlockquote:
         () =>
         ({ state, chain }) => {
-          const position = state.selection.$from.start();
-          const selectionContent = state.selection.content();
+          const position = state.selection.$from.start()
+          const selectionContent = state.selection.content()
 
           return chain()
             .focus()
@@ -61,26 +61,26 @@ export const BlockquoteFigure = Figure.extend({
               type: this.name,
               content: [
                 {
-                  type: "quote",
+                  type: 'quote',
                   content: selectionContent.content.toJSON() || [
                     {
-                      type: "paragraph",
+                      type: 'paragraph',
                       attrs: {
-                        textAlign: "left",
+                        textAlign: 'left',
                       },
                     },
                   ],
                 },
                 {
-                  type: "quoteCaption",
+                  type: 'quoteCaption',
                 },
               ],
             })
             .focus(position + 1)
-            .run();
+            .run()
         },
-    };
+    }
   },
-});
+})
 
-export default BlockquoteFigure;
+export default BlockquoteFigure
