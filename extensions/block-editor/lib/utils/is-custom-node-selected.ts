@@ -6,7 +6,7 @@ import {
   // Figcaption,
   // HorizontalRule,
   Image,
-  // ImageUpload,
+  ImageUpload,
   Link,
 } from "../../extensions";
 
@@ -39,7 +39,7 @@ export const isCustomNodeSelected = (editor: Editor, node: HTMLElement) => {
   const customNodes = [
     // HorizontalRule.name,
     Image.name,
-    // ImageUpload.name,
+    ImageUpload.name,
     CodeBlock.name,
     // ImageBlock.name,
     Link.name,
