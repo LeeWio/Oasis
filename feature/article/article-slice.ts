@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { ArticlePayload } from '../api/article-api'
 
 interface ArticleState {
-  draft: ArticlePayload | null
+  draft: Partial<ArticlePayload> | null
 }
 
 const initialState: ArticleState = {
@@ -20,7 +20,8 @@ export const articleSlice = createSlice({
      * @param state - Current state of the slice
      * @param action - Action containing partial updates for the draft
      */
-    updateDraft: (state, action: PayloadAction<ArticlePayload>) => {
+
+    updateDraft: (state, action: PayloadAction<Partial<ArticlePayload>>) => {
       state.draft = { ...state.draft, ...action.payload }
     },
     /**

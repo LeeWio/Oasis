@@ -7,6 +7,7 @@ import {
   Modal,
   ModalContent,
 } from '@heroui/modal'
+
 import '@/extensions/block-editor/styles/index.css'
 import 'katex/dist/katex.min.css'
 

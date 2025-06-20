@@ -14,7 +14,7 @@ export type ArticlePayload = {
   createAt?: string
   updateAt?: string
   tags?: TagPayload[]
-  Categories?: CategoryPayload[]
+  categories?: CategoryPayload[]
   thumbnailUrl?: string
 }
 
@@ -38,7 +38,7 @@ export const ArticleApi = createApi({
     create: build.mutation<string, ArticlePayload>({
       query: (article) => ({
         url: ``,
-        method: 'GET',
+        method: 'POST',
         body: article,
       }),
     }),
@@ -91,4 +91,4 @@ export const ArticleApi = createApi({
   }),
 })
 
-export const { useGetQuery, useLazyGetQuery } = ArticleApi
+export const { useGetQuery, useLazyGetQuery, useCreateMutation } = ArticleApi

@@ -2,7 +2,7 @@
 
 import { BlockEditor } from '@/components/block-editor'
 import { FileUpload } from '@/components/file-upload'
-import { useGetQuery } from '@/feature/api/tag-api'
+import { useGetQuery, useLazyGetQuery } from '@/feature/api/tag-api'
 import { useGetQuery as useGetCategoryQuery } from '@/feature/api/category-api'
 
 import { Button } from '@heroui/button'
