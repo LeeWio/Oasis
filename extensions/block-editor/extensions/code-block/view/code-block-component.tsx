@@ -15,7 +15,7 @@ export const CodeBlockComponent = ({
     variant,
     size,
     radius,
-    className: 'p-4',
+    // className: 'p-4',
   })
 
   const languages = extension.options.lowlight.listLanguages()
@@ -45,7 +45,6 @@ export const CodeBlockComponent = ({
           <SelectItem key={lang}>{lang}</SelectItem>
         ))}
       </Select>
-
       <NodeViewContent {...getCodeBlockProps()} />
     </NodeViewWrapper>
   )

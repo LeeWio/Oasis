@@ -21,6 +21,7 @@ import { EditorFooter } from './editor-footer'
 import { Button } from '@heroui/button'
 import { Icon } from '@iconify/react'
 import { cn } from '@heroui/theme'
+import { CodeBlockMenu } from '@/extensions/block-editor/extensions/code-block/view/code-block-menu'
 
 type BlockEditorProps = {
   isModalOpen: boolean
@@ -117,6 +118,7 @@ export const BlockEditor = ({
                 />
                 <LinkMenu editor={editor} />
                 <ImageMenu editor={editor} />
+                <CodeBlockMenu editor={editor} />
               </ModalBody>
               <ModalFooter>
                 <EditorFooter

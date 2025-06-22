@@ -1,6 +1,6 @@
 import { CodeBlockLowlight } from '@tiptap/extension-code-block-lowlight'
 import { ReactNodeViewRenderer, mergeAttributes } from '@tiptap/react'
-import { CodeBlockComponent } from './view/CodeBlockComponent'
+import { CodeBlockComponent } from './view/code-block-component'
 import { all, createLowlight } from 'lowlight'
 
 const lowlight = createLowlight(all)
@@ -19,6 +19,7 @@ declare module '@tiptap/react' {
       setCodeBlockRadius: (radius: NextProps['radius']) => ReturnType
       setCodeBlockVariant: (variant: NextProps['variant']) => ReturnType
       setCodeBlockSize: (size: NextProps['size']) => ReturnType
+      setCodeBlockLang: (lang: string) => ReturnType
     }
   }
 }
@@ -75,6 +76,11 @@ export const CodeBlock = CodeBlockLowlight.extend({
         (variant: NextProps['variant']) =>
         ({ commands }) => {
           return commands.updateAttributes(this.name, { variant })
+        },
+      setCodeBlockLang:
+        (lang: string) =>
+        ({ commands }) => {
+          return commands.updateAttributes(this.name, { lang })
         },
     }
   },
