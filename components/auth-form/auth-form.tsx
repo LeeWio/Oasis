@@ -53,12 +53,12 @@ export const AuthForm = () => {
   } = useDisclosure()
 
   const [selectedOption, setSelectedOption] = React.useState(
-    new Set(['SignUp'])
+    new Set(['SignIn'])
   )
 
   const descriptionsMap = {
-    SignUp: 'Create a new account',
     SignIn: 'Log in to your account',
+    SignUp: 'Create a new account',
   }
 
   const labelsMap = {

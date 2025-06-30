@@ -57,7 +57,7 @@ export const ArticleApi = createApi({
               'Empty data, please check your input or try again later.'
             )
           }
-
+          console.log(response)
           return response.data
         }
 
