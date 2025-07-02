@@ -24,26 +24,25 @@ const images = [
 
 export default function Home() {
   return (
-    <section className="ml-0 flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-      <div className="flex w-full flex-row justify-center space-x-6 ">
-        <ImageMouseTrail
-          items={images}
-          maxNumberOfImages={5}
-          distance={25}
-          imgClass="sm:w-40 w-28 sm:h-48 h-36"
-          fadeAnimation={true}
-        >
-          <article className="relative z-50 mix-blend-difference">
-            <h1 className="lg:text-4xl md:text-3xl text-xl text-center font-semibold mix-blend-difference">
-              ✨ Experience Interactive Designs with <br />
-              Dynamic Mouse Trails
-            </h1>
-          </article>
-        </ImageMouseTrail>
-        <ScrollElement direction="left" className="text-5xl text-right py-44">
-          adfadfasdf
-        </ScrollElement>
-      </div>
+    <section className="ml-0 flex flex-col items-center justify-center gap-4 ">
+      <ImageMouseTrail
+        items={images}
+        maxNumberOfImages={5}
+        distance={25}
+        imgClass="sm:w-40 w-28 sm:h-48 h-36"
+        fadeAnimation={true}
+        className="w-full bg-red-500"
+      >
+        <article className="relative z-50 mix-blend-difference">
+          <h1 className="lg:text-4xl md:text-3xl text-xl text-center font-semibold mix-blend-difference">
+            ✨ Experience Interactive Designs with <br />
+            Dynamic Mouse Trails
+          </h1>
+        </article>
+      </ImageMouseTrail>
+      <ScrollElement direction="left" className="text-5xl text-right py-44">
+        adfadfasdf
+      </ScrollElement>
     </section>
   )
 }

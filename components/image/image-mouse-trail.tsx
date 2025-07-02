@@ -79,7 +79,7 @@ export const ImageMouseTrail = ({
       onTouchMove={(e) => handleOnMove(e.touches[0])}
       ref={containerRef}
       className={cn(
-        'grid place-content-center h-[600px] w-full bg-[#e0dfdf] relative overflow-hidden rounded-lg',
+        'grid place-content-center h-[600px] w-full relative overflow-hidden rounded-lg',
         className
       )}
     >
