@@ -15,7 +15,7 @@ export const CodeBlockComponent = ({
     variant,
     size,
     radius,
-    // className: 'p-4',
+    className: 'p-4',
   })
 
   const languages = extension.options.lowlight.listLanguages()

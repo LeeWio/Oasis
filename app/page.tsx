@@ -1,13 +1,8 @@
 'use client'
 
-import type { CircleChartProps } from '@/components/rechart/CircleCharCard'
-
 import React from 'react'
-import { Card, CardBody } from '@heroui/card'
 
-import { CircleChartCard } from '@/components/rechart/CircleCharCard'
 import ScrollElement from '@/components/scroll/scroll-element'
-import { Image } from '@heroui/image'
 import { ImageMouseTrail } from '@/components/image/image-mouse-trail'
 
 const images = [
@@ -31,7 +26,7 @@ export default function Home() {
         distance={25}
         imgClass="sm:w-40 w-28 sm:h-48 h-36"
         fadeAnimation={true}
-        className="w-full bg-red-500"
+        className="w-full h-screen"
       >
         <article className="relative z-50 mix-blend-difference">
           <h1 className="lg:text-4xl md:text-3xl text-xl text-center font-semibold mix-blend-difference">
